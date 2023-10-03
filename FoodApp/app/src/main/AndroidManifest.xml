@@ -15,7 +15,14 @@
         android:theme="@style/Theme.FoodApp"
         tools:targetApi="31">
         <activity
+
             android:name=".Login.ForgotPasswordActivity"
+
+            android:name=".History_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Search_Activity"
+
             android:exported="false" />
         <activity
             android:name=".MainActivity"
