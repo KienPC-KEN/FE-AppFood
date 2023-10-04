@@ -14,10 +14,13 @@
         android:gravity="center"
         android:layout_marginTop="50dp"
         android:text="History"/>
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lvItem"
         android:layout_width="match_parent"
         android:layout_height="800dp"
-        android:layout_marginTop="200dp"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="200dp"
+        tools:listitem="@layout/item_history"/>
 
 
 
