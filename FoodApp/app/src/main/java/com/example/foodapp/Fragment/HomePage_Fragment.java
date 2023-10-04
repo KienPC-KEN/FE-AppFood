@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
-
+import com.example.foodapp.R;
 
 
 public class HomePage_Fragment extends Fragment {

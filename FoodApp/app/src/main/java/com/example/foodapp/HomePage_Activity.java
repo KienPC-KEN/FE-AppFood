@@ -2,20 +2,28 @@ package com.example.foodapp;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.foodapp.Fragment.History_Fragment;
+import com.example.foodapp.Fragment.HomePage_Fragment;
+import com.example.foodapp.Fragment.Menu_Fragment;
+import com.example.foodapp.Fragment.More_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomePage_Activity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+
+
+    FragmentManager fm = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,59 +31,35 @@ public class HomePage_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
 
-        viewPager = findViewById(R.id.view_pager);
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.frameLayout, new HomePage_Fragment()).commit();
 
-        ViewPagerAdapter2 adapter = new ViewPagerAdapter2(getSupportFragmentManager(),FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(3);//load ra trước 3 fragment
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-            //vuốt chuyển fragment
-            @Override
-            public void onPageSelected(int position) {
-                switch (position){
-                    case 0:
-                        bottomNavigationView.getMenu().findItem(R.id.home).setChecked(true);
-                        break;
-                    case 1:
-                        bottomNavigationView.getMenu().findItem(R.id.menu).setChecked(true);
-                        break;
-                    case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.history).setChecked(true);
-                        break;
-                    case 3:
-                        bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
-                    viewPager.setCurrentItem(0);
-                    return true;
-                } else if (item.getItemId() == R.id.menu) {
-                    viewPager.setCurrentItem(1);
-                    return true;
-                } else if (item.getItemId() == R.id.history) {
-                    viewPager.setCurrentItem(2);
-                    return true;
-                } else if (item.getItemId() == R.id.more) {
-                    viewPager.setCurrentItem(3);
-                    return true;
+                switch (item.getItemId()){
+                    case R.id.home:
+
+                        fm.beginTransaction().replace(R.id.frameLayout, new HomePage_Fragment()).commit();
+                        return true;
+                    case R.id.menu:
+                        fm.beginTransaction().replace(R.id.frameLayout, new Menu_Fragment()).commit();
+
+                        return true;
+                    case R.id.history:
+
+                        fm.beginTransaction().replace(R.id.frameLayout, new History_Fragment()).commit();
+
+                        return true;
+                    case R.id.more:
+
+                        fm.beginTransaction().replace(R.id.frameLayout, new More_Fragment()).commit();
+
+                        return true;
                 }
                 return false;
             }
