@@ -30,8 +30,6 @@ public class HomePage_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-
-
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         FragmentManager fm = getSupportFragmentManager();
@@ -43,22 +41,16 @@ public class HomePage_Activity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.home:
-
                         fm.beginTransaction().replace(R.id.frameLayout, new HomePage_Fragment()).commit();
                         return true;
                     case R.id.menu:
                         fm.beginTransaction().replace(R.id.frameLayout, new Menu_Fragment()).commit();
-
                         return true;
                     case R.id.history:
-
                         fm.beginTransaction().replace(R.id.frameLayout, new History_Fragment()).commit();
-
                         return true;
                     case R.id.more:
-
                         fm.beginTransaction().replace(R.id.frameLayout, new More_Fragment()).commit();
-
                         return true;
                 }
                 return false;

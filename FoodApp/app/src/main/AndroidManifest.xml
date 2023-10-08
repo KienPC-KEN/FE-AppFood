@@ -19,12 +19,7 @@
 
             android:name=".Login.ForgotPasswordActivity"
             android:exported="false" />
-        <activity
-            android:name=".Search_Activity"
 
-            android:name=".Login.ForgotPasswordActivity"
-            android:name=".History_Activity"
-            android:exported="false" />
         <activity
             android:name=".Search_Activity"
 
@@ -38,11 +33,10 @@
             android:name=".Login.LoginActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".HomePage_Activity"
+
 
         <activity
-            android:name=".Login.LoginActivity"
+            android:name=".HomePage_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
