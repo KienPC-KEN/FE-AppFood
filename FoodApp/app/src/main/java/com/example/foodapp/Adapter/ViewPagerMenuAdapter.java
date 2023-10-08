@@ -9,8 +9,11 @@ import com.example.foodapp.Fragment.DrinkFragment;
 import com.example.foodapp.Fragment.FoodsFragment;
 
 public class ViewPagerMenuAdapter extends FragmentStateAdapter {
+
+
     public ViewPagerMenuAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
+
     }
 
     @NonNull
