@@ -1,4 +1,4 @@
-package com.example.foodapp.Fragment;
+package com.example.foodapp.Fragment_Customer;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,11 +14,11 @@ import androidx.fragment.app.Fragment;
 import com.example.foodapp.R;
 
 
-public class HomePage_Fragment extends Fragment {
+public class Home_Fragment extends Fragment {
 
 
 
-    public HomePage_Fragment() {
+    public Home_Fragment() {
         // Required empty public constructor
     }
 
@@ -38,7 +38,7 @@ public class HomePage_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_home_page_, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_customer, container, false);
 
         SearchView sv_foods = view.findViewById(R.id.sv_foods);
         sv_foods.setOnClickListener(new View.OnClickListener() {

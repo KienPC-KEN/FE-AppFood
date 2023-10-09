@@ -1,12 +1,12 @@
-package com.example.foodapp.Adapter;
+package com.example.foodapp.Adapter_Customer;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.foodapp.Fragment.DrinkFragment;
-import com.example.foodapp.Fragment.FoodsFragment;
+import com.example.foodapp.Fragment_Customer.DrinkFragment;
+import com.example.foodapp.Fragment_Customer.FoodsFragment;
 
 public class ViewPagerMenuAdapter extends FragmentStateAdapter {
 

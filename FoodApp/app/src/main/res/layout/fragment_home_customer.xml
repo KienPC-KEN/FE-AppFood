@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#E6E5E5"
     android:orientation="vertical"
-    tools:context=".Fragment.HomePage_Fragment">
+    tools:context=".Fragment_Customer.Home_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                 android:scrollbars="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layoutDirection="ltr"
-                tools:listitem="@layout/item_food"/>
+                tools:listitem="@layout/item_food_customer"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                 android:scrollbars="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layoutDirection="ltr"
-                tools:listitem="@layout/item_drink"/>
+                tools:listitem="@layout/item_drink_customer"/>
             <ImageView
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"

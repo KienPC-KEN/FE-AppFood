@@ -36,7 +36,7 @@
 
 
         <activity
-            android:name=".HomePage_Activity"
+            android:name=".Customer_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

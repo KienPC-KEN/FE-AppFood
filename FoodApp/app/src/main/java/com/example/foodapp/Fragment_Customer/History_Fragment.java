@@ -1,21 +1,20 @@
-package com.example.foodapp.Fragment;
+package com.example.foodapp.Fragment_Customer;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.foodapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DrinkFragment#newInstance} factory method to
+ * Use the {@link History_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DrinkFragment extends Fragment {
+public class History_Fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +25,7 @@ public class DrinkFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DrinkFragment() {
+    public History_Fragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +35,11 @@ public class DrinkFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DrinkFragment.
+     * @return A new instance of fragment History_Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DrinkFragment newInstance(String param1, String param2) {
-        DrinkFragment fragment = new DrinkFragment();
+    public static History_Fragment newInstance(String param1, String param2) {
+        History_Fragment fragment = new History_Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +60,6 @@ public class DrinkFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_drink, container, false);
+        return inflater.inflate(R.layout.fragment_history_customer, container, false);
     }
 }
