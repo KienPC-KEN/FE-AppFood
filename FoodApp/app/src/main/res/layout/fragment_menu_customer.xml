@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.Menu_Fragment">
+    tools:context=".Fragment_Customer.Menu_Fragment">
 
 
     <LinearLayout
@@ -54,7 +54,8 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/shape_search"
             android:iconifiedByDefault="false"
             app:queryHint="Seacrch foods"
