@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.foodapp.Fragment_Customer.History_Fragment;
+import com.example.foodapp.Fragment_Customer.HistoryFragment;
 import com.example.foodapp.Fragment_Customer.Home_Fragment;
 import com.example.foodapp.Fragment_Customer.Menu_Fragment;
 import com.example.foodapp.Fragment_Customer.More_Fragment;
@@ -29,7 +29,7 @@ public class Customer_Activity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.frameLayout, new Home_Fragment()).commit();
+        fm.beginTransaction().replace(R.id.frameLayout, new com.example.foodapp.Fagment_Staff.Home_Fragment()).commit();
 
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -43,7 +43,7 @@ public class Customer_Activity extends AppCompatActivity {
                         fm.beginTransaction().replace(R.id.frameLayout, new Menu_Fragment()).commit();
                         return true;
                     case R.id.history:
-                        fm.beginTransaction().replace(R.id.frameLayout, new History_Fragment()).commit();
+                        fm.beginTransaction().replace(R.id.frameLayout, new HistoryFragment()).commit();
                         return true;
                     case R.id.more:
                         fm.beginTransaction().replace(R.id.frameLayout, new More_Fragment()).commit();

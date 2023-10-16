@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".History_Activity">
+    android:layout_height="match_parent">
 
     <!-- Nội dung chính của ứng dụng ở đây -->
     <TextView
@@ -22,12 +21,4 @@
         android:layout_marginTop="200dp"
         tools:listitem="@layout/item_history"/>
 
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>
