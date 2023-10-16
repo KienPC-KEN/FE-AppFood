@@ -29,7 +29,7 @@ public class Customer_Activity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.frameLayout, new com.example.foodapp.Fagment_Staff.Home_Fragment()).commit();
+        fm.beginTransaction().replace(R.id.frameLayout, new Home_Fragment()).commit();
 
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
