@@ -30,13 +30,13 @@
 
 
         <activity
-            android:name=".Login.LoginActivity"
+            android:name=".Customer_Activity"
             android:exported="false" />
 
 
 
         <activity
-            android:name=".Customer_Activity"
+            android:name=".Login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
