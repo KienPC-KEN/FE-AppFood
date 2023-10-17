@@ -76,7 +76,7 @@
                     android:text="Login"
                     android:backgroundTint="@color/FE5E00"
                     android:textStyle="bold"
-                    android:id="@+id/singup_btn"/>
+                    android:id="@+id/login_btn"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
