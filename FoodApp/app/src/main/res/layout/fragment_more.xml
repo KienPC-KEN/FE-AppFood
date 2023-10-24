@@ -36,6 +36,7 @@
         android:background="@drawable/vie_bg"
         >
         <TextView
+            android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -45,6 +46,7 @@
             android:drawableRight="@drawable/next"
              />
         <TextView
+            android:id="@+id/manager_acc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -54,6 +56,7 @@
             android:drawableRight="@drawable/next"
             />
         <TextView
+            android:id="@+id/change_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -63,6 +66,7 @@
 
             />
         <ImageView
+            android:id="@+id/logout"
             android:layout_width="80dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
