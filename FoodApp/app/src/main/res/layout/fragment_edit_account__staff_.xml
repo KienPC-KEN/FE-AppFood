@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/gray"
+    tools:context=".Fagment_Staff.EditAccount_Staff_Fragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <ImageView
+            android:id="@+id/img_back_addaccount"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:layout_marginLeft="25dp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/vie_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="Edit Account"
+                android:textColor="@color/FE5E00"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Tên"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/edt_editname_acc"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_sgup"
+                android:hint="Nguyễn Văn A"
+                android:paddingLeft="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Số điện thoại"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/edt_editphone_acc"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_sgup"
+                android:hint="0976512765"
+                android:paddingLeft="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Password"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/edt_editpass_acc"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:inputType="textPassword"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_sgup"
+                android:hint="******"
+                android:paddingLeft="20dp" />
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:layout_width="350dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/edittext_sgup"-->
+<!--                android:layout_marginLeft="35dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                app:endIconMode="password_toggle"-->
+<!--                android:hint="123456">-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:layout_width="345dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:inputType="textPassword"-->
+<!--                    android:backgroundTint="@color/gray"/>-->
+
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Ngày sinh"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/edt_editdate_acc"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_sgup"
+                android:hint="09/12/2000"
+                android:paddingLeft="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Email"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/edt_editemail_acc"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_sgup"
+                android:hint="vana@gmail.com"
+                android:paddingLeft="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Địa chỉ"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/edt_editAddress_acc"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_sgup"
+                android:hint="Phương Canh, Nam Từ Liêm, Hà Nội"
+                android:paddingLeft="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Ảnh đại diện"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/select_editimg"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/btn_selectimg"
+                    android:text="Tải ảnh lên" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:paddingTop="15dp"
+                    android:text="Phân quyền"
+                    android:textColor="@color/black" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp">
+
+                    <RadioButton
+                        android:id="@+id/btn_pq_admin"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Admin" />
+
+                    <RadioButton
+                        android:id="@+id/btn_pq_nvien"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="Nhân viên" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_edit_resertAcc"
+                    android:text="Hủy"
+                    android:backgroundTint="@color/FE5E00"
+                    android:layout_marginRight="30dp"/>
+
+                <Button
+                    android:id="@+id/btn_edit_saveAcc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:backgroundTint="@color/FE5E00"
+                    android:text="Lưu thay đổi" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
