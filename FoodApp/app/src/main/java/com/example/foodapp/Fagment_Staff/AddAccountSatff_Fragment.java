@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.foodapp.R;
+import com.example.foodapp.ReviewPageFragment;
 
 import java.util.Calendar;
 
@@ -42,6 +45,17 @@ public class AddAccountSatff_Fragment extends Fragment {
         btn_SelectImg = view.findViewById(R.id.select_img_addaccount);
 
         img_Back = view.findViewById(R.id.img_back_addaccount);
+
+        img_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction =  fragmentManager.beginTransaction();
+                ReviewPageFragment reviewPageFragment = new ReviewPageFragment();
+                transaction.replace(R.id.frameLayout_Addaccount, reviewPageFragment);
+                transaction.commit();
+            }
+        });
 
         final Calendar calendar = Calendar.getInstance();
         final  int year = calendar.get(Calendar.YEAR);
