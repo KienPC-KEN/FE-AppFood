@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.Fagment_Staff;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,9 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
-public class ChangePassFragment extends Fragment {
+import com.example.foodapp.R;
+
+public class ChangePassFragment_Staff extends Fragment {
     private Button btnResert, btnSave;
     private EditText passOld, passNew, retypePass;
     private ImageView back;
