@@ -1,8 +1,7 @@
-package com.example.foodapp;
+package com.example.foodapp.Fagment_Staff;
 
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,10 +15,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
-import com.example.foodapp.Fragment_Customer.ChangePass_Fragment;
 import com.example.foodapp.Login.LoginActivity;
 import com.example.foodapp.R;
-public class MoreFragment extends Fragment {
+
+public class MoreFragment_Staff extends Fragment {
 
     private TextView profile, manager_acc, change_pass;
     private ImageView logout;
@@ -27,7 +26,7 @@ public class MoreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_more, container, false);
+        View view = inflater.inflate(R.layout.fragment_more_staff, container, false);
         profile = view.findViewById(R.id.profile);
         manager_acc = view.findViewById(R.id.manager_acc);
         change_pass = view.findViewById(R.id.change_pass);
@@ -37,7 +36,7 @@ public class MoreFragment extends Fragment {
             public void onClick(View view) {
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                ProfileFragment profileFragment = new ProfileFragment();
+                ProfileFragment_Staff profileFragment = new ProfileFragment_Staff();
                 transaction.add(R.id.frameLayout, profileFragment);
                 transaction.commit();
             }
@@ -47,8 +46,8 @@ public class MoreFragment extends Fragment {
             public void onClick(View view) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                ReviewPageFragment reviewpageFragment = new ReviewPageFragment();
-                fragmentTransaction.replace(R.id.frameLayout, reviewpageFragment);
+                ManagerAccountFragment managerAccountFragment = new ManagerAccountFragment();
+                fragmentTransaction.replace(R.id.frameLayout, managerAccountFragment);
                 fragmentTransaction.commit();
             }
         });
@@ -58,7 +57,7 @@ public class MoreFragment extends Fragment {
             public void onClick(View view) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                ChangePassFragment changePassFragment = new ChangePassFragment();
+                ChangePassFragment_Staff changePassFragment = new ChangePassFragment_Staff();
                 fragmentTransaction.replace(R.id.frameLayout, changePassFragment);
                 fragmentTransaction.commit();
             }
