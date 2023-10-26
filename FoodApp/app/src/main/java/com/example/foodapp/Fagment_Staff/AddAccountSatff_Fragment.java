@@ -4,7 +4,10 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +22,8 @@ import java.util.Calendar;
 
 
 public class AddAccountSatff_Fragment extends Fragment {
-    private EditText edt_Ten, edt_SDT, edt_Pass, edt_Date, edt_Email, edt_Address;
-    private Button btn_SelectImg, btn_Resert, btn_Save;
+    private EditText edt_Ten, edt_SDT, edt_Pass, edt_Date, edt_Email, edt_Address, edt_Img;
+    private Button btn_Resert, btn_Save;
 
     private ImageView img_Back;
 
@@ -36,12 +39,24 @@ public class AddAccountSatff_Fragment extends Fragment {
         edt_Date = view.findViewById(R.id.edt_date_account);
         edt_Email = view.findViewById(R.id.edt_email_account);
         edt_Address = view.findViewById(R.id.edt_address_account);
+        edt_Img = view.findViewById(R.id.edt_adImg_account);
 
         btn_Resert = view.findViewById(R.id.btn_resertAcc);
         btn_Save = view.findViewById(R.id.btn_saveAcc);
-        btn_SelectImg = view.findViewById(R.id.select_img_addaccount);
 
         img_Back = view.findViewById(R.id.img_back_addaccount);
+
+        img_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction =  fragmentManager.beginTransaction();
+                ManagerAccountFragment managerAccountFragment = new ManagerAccountFragment();
+                transaction.replace(R.id.frame_Accounteditacc, managerAccountFragment);
+                transaction.commit();
+                Log.d("nutBack", "back");
+            }
+        });
 
         final Calendar calendar = Calendar.getInstance();
         final  int year = calendar.get(Calendar.YEAR);
@@ -71,6 +86,7 @@ public class AddAccountSatff_Fragment extends Fragment {
                 edt_Date.setText("");
                 edt_Email.setText("");
                 edt_Address.setText("");
+                edt_Img.setText("");
             }
         });
         return view;
