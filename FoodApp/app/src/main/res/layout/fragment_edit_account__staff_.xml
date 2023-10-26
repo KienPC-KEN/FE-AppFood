@@ -161,13 +161,14 @@
                     android:text="Ảnh đại diện"
                     android:textColor="@color/black" />
 
-                <Button
-                    android:id="@+id/select_editimg"
-                    android:layout_width="150dp"
+                <EditText
+                    android:id="@+id/edt_editImg_acc"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/btn_selectimg"
-                    android:text="Tải ảnh lên" />
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/edittext_sgup"
+                    android:hint="https://i.pinimg.com/564x/81/45/a2/8145a2486f50cb025f8fce0660d3925b.jpg"
+                    android:paddingLeft="20dp" />
             </LinearLayout>
 
             <LinearLayout
