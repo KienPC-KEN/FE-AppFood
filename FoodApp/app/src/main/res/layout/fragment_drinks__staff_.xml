@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".Fagment_Staff.Drinks_Staff_Fragment"
     android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <ListView
         android:id="@+id/lv_menu"

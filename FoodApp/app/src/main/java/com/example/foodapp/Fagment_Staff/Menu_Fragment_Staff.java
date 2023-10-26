@@ -14,10 +14,15 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.foodapp.Adapter_Customer.ViewPagerMenuAdapter;
 import com.example.foodapp.Adapter_Customer.ViewPagerMenuStaffAdapter;
 import com.example.foodapp.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class Menu_Fragment_Staff extends Fragment {
+
+    BottomNavigationView bottomNavigationView;
+
+
 
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;

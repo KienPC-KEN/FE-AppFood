@@ -3,16 +3,16 @@ package com.example.foodapp.Adapter_Customer;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
+
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.foodapp.Fagment_Staff.Drinks_Staff_Fragment;
 import com.example.foodapp.Fagment_Staff.Food_Staff_Fragment;
-import com.example.foodapp.Fragment_Customer.DrinkFragment;
-import com.example.foodapp.Fragment_Customer.FoodsFragment;
+
 
 public class ViewPagerMenuStaffAdapter extends FragmentStateAdapter {
+
+
 
 
     public ViewPagerMenuStaffAdapter(@NonNull FragmentActivity fragmentActivity) {
