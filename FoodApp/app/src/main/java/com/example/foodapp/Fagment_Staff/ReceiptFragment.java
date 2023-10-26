@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.Fagment_Staff;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.foodapp.R;
 
 public class ReceiptFragment extends Fragment {
     @Override
