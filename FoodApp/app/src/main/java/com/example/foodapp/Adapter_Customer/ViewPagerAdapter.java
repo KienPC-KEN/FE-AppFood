@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.foodapp.Login.LoginFragment;
+import com.example.foodapp.Login.LoginFragment_Customer;
 import com.example.foodapp.Login.SingupFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
@@ -20,7 +20,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         if (position == 1){
             return new SingupFragment();
         }
-        return new LoginFragment();
+        return new LoginFragment_Customer();
     }
 
     @Override

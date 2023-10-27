@@ -15,11 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,21 +24,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.foodapp.Customer_Activity;
-import com.example.foodapp.R;
 import com.example.foodapp.config.Config;
-import com.example.foodapp.databinding.FragmentLoginBinding;
+import com.example.foodapp.databinding.FragmentLoginCustomerBinding;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment_Customer extends Fragment {
 
-    private FragmentLoginBinding binding;
+    private FragmentLoginCustomerBinding binding;
     String IP = Config.IP;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentLoginBinding.inflate(inflater, container, false);
+        binding = FragmentLoginCustomerBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
         return view;
@@ -64,6 +63,14 @@ public class LoginFragment extends Fragment {
                 loginCustomer();
             }
         });
+
+        binding.btnLoginstaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LoginActivity_Staff.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loginCustomer() {
@@ -78,11 +85,31 @@ public class LoginFragment extends Fragment {
                         Log.e("Thành công", "Đăng nhập thành công " + response.toString() );
                         Toast.makeText(getContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
-                        // Lưu thông tin người dùng đăng nhập vào SharedPreferences
-//                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", MODE_PRIVATE);
-//                        Editor editor = sharedPreferences.edit();
-//
-//                        editor.apply();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String name = jsonObject.getString("name");
+                            String phone = jsonObject.getString("phone");
+                            String password = jsonObject.getString("password");
+                            String date = jsonObject.getString("date");
+                            String sex = jsonObject.getString("sex");
+                            String image = jsonObject.getString("image");
+                            String email = jsonObject.getString("email");
+                            String address = jsonObject.getString("address");
+                            // Lưu thông tin người dùng đăng nhập vào SharedPreferences
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", MODE_PRIVATE);
+                            Editor editor = sharedPreferences.edit();
+                            editor.putString("name", name);
+                            editor.putString("phone", phone);
+                            editor.putString("password", password);
+                            editor.putString("date", date);
+                            editor.putString("sex", sex);
+                            editor.putString("image", image);
+                            editor.putString("email", email);
+                            editor.putString("address", address);
+                            editor.apply();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
 
                         Intent intent = new Intent(getActivity(), Customer_Activity.class);
                         startActivity(intent);
