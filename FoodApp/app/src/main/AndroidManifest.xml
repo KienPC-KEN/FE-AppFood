@@ -33,6 +33,15 @@
             android:name=".Login.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".Add_Food_Acivity"
+            android:exported="false" />
+        <activity
+            android:name=".Add_Drink_Acivity"
+            android:exported="false" />
+        <activity
+            android:name=".Remove_Activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

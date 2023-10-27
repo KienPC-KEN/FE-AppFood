@@ -10,9 +10,8 @@ import android.view.MenuItem;
 
 import com.example.foodapp.Fagment_Staff.Menu_Fragment_Staff;
 import com.example.foodapp.Fagment_Staff.MoreFragment_Staff;
-import com.example.foodapp.Fagment_Staff.More_Fragment_Staff;
 import com.example.foodapp.Fagment_Staff.Home_Fragment;
-import com.example.foodapp.Fagment_Staff.Recipt_Fragment;
+import com.example.foodapp.Fagment_Staff.ReceiptFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                         fm.beginTransaction().replace(R.id.frameLayout, new Menu_Fragment_Staff()).commit();
                         return true;
                     case R.id.history:
-                        fm.beginTransaction().replace(R.id.frameLayout, new Recipt_Fragment()).commit();
+                        fm.beginTransaction().replace(R.id.frameLayout, new ReceiptFragment()).commit();
                         return true;
                     case R.id.more:
                         fm.beginTransaction().replace(R.id.frameLayout, new MoreFragment_Staff()).commit();
