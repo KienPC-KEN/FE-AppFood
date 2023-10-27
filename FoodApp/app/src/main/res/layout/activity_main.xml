@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/main">
 
 
 
@@ -32,6 +33,7 @@
         app:itemTextColor="@color/black"
         app:menu="@menu/menu_navigation"
         tools:ignore="ExtraText,MissingConstraints"
+
         />
 
 </RelativeLayout>

@@ -13,8 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodApp"
-        android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">
+
         <activity
             android:name=".Login.LoginActivity_Staff"
             android:exported="false" />
@@ -25,13 +27,13 @@
             android:name=".Search_Activity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".Customer_Activity"
             android:exported="false" />
         <activity
             android:name=".Login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

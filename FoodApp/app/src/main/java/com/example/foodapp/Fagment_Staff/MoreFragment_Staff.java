@@ -30,6 +30,7 @@ public class MoreFragment_Staff extends Fragment {
         profile = view.findViewById(R.id.profile);
         manager_acc = view.findViewById(R.id.manager_acc);
         change_pass = view.findViewById(R.id.change_pass);
+        logout = view.findViewById(R.id.logout);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override

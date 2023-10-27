@@ -160,13 +160,15 @@
                     android:text="Ảnh đại diện"
                     android:textColor="@color/black" />
 
-                <Button
-                    android:id="@+id/select_img_addaccount"
-                    android:layout_width="150dp"
+                <EditText
+                    android:id="@+id/edt_adImg_account"
+                    android:layout_width="270dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/btn_selectimg"
-                    android:text="Tải ảnh lên" />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edittext_sgup"
+                    android:hint="Nhập Link ảnh"
+                    android:paddingLeft="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -195,5 +197,12 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frameLayout_Addaccount">
+
+    </FrameLayout>
 
 </LinearLayout>
