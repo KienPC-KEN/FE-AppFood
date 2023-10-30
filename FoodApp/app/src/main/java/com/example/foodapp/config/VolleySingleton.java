@@ -7,20 +7,20 @@ import com.android.volley.toolbox.Volley;
 
 public class VolleySingleton {
     private static final String TAG = "volleySingleton";
-    private RequestQueue mRequestQueue;
-    private static VolleySingleton sInstance;
+    private RequestQueue requestQueue;
+    private static VolleySingleton instance;
     public VolleySingleton(Context context) {
-        if(mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(context.getApplicationContext());
+        if(requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
     }
     public static synchronized VolleySingleton getInstance(Context context) {
-        if(sInstance == null) {
-            sInstance = new VolleySingleton(context);
+        if(instance == null) {
+            instance = new VolleySingleton(context);
         }
-        return sInstance;
+        return instance;
     }
     public RequestQueue getRequestQueue() {
-        return mRequestQueue;
+        return requestQueue;
     }
 }
