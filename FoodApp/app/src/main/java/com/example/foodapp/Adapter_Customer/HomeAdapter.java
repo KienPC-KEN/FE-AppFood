@@ -10,13 +10,12 @@ import com.example.foodapp.Model.Product;
 import com.example.foodapp.databinding.ItemDrinkCustomerBinding;
 import com.squareup.picasso.Picasso;
 
-import java.net.URL;
 import java.util.ArrayList;
 
-public class Customer_HomeAdapter extends RecyclerView.Adapter<Customer_HomeAdapter.Holder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
     private final ArrayList<Product> list;
 
-    public Customer_HomeAdapter(ArrayList<Product> list) {
+    public HomeAdapter(ArrayList<Product> list) {
         this.list = list;
     }
 
