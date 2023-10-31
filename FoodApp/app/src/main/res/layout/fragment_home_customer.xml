@@ -76,6 +76,7 @@
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal"
                 android:scrollbars="horizontal"
+                android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layoutDirection="ltr"
                 tools:listitem="@layout/item_food_customer"/>
@@ -96,6 +97,7 @@
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal"
                 android:scrollbars="horizontal"
+                android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layoutDirection="ltr"
                 tools:listitem="@layout/item_drink_customer"/>
