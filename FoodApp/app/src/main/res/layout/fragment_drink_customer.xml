@@ -7,15 +7,14 @@
     tools:context=".Fragment_Customer.DrinkFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFoodsMenu"
+        android:id="@+id/rcvDrinkMenu"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
         android:orientation="horizontal"
         android:scrollbars="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layoutDirection="ltr"
-        tools:listitem="@layout/iteam_tabdrink"/>
+        android:layoutDirection="ltr"/>
 
 </FrameLayout>
