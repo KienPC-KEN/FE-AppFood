@@ -1,5 +1,6 @@
 package com.example.foodapp.Adapter_Customer;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -47,8 +48,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
             this.binding = binding;
         }
 
+        @SuppressLint("SetTextI18n")
         void bindData(Product product){
-            Picasso.get().load(product.getImage()).into(binding.imgDrink);
+            Picasso.get().load(product.getImage()).resize(151,105).centerCrop().into(binding.imgDrink);
             binding.tvNameDrink.setText(product.getName());
             binding.tvPriceDrink.setText(product.getPrice().toString());
         }
