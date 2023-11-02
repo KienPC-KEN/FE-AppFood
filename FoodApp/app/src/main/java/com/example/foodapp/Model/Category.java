@@ -15,6 +15,9 @@ public class Category {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("type")
+    @Expose
+    private String type;
 
     public String getCreatedAt() {
         return createdAt;
@@ -38,6 +41,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }
