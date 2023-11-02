@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Model.Product;
-import com.example.foodapp.databinding.ItemDrinkCustomerBinding;
+import com.example.foodapp.databinding.ItemProductBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new Holder(ItemDrinkCustomerBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new Holder(ItemProductBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -40,9 +40,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
 
     public static class Holder extends RecyclerView.ViewHolder {
 
-        ItemDrinkCustomerBinding binding;
+        ItemProductBinding binding;
 
-        public Holder(@NonNull ItemDrinkCustomerBinding binding) {
+        public Holder(@NonNull ItemProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
