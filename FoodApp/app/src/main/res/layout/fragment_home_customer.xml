@@ -77,8 +77,6 @@
                 android:layout_marginRight="20dp"
                 android:layoutDirection="ltr"
                 android:orientation="horizontal"
-                android:overScrollMode="never"
-                android:scrollbars="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <TextView
@@ -100,8 +98,6 @@
                 android:layout_marginRight="20dp"
                 android:layoutDirection="ltr"
                 android:orientation="horizontal"
-                android:overScrollMode="never"
-                android:scrollbars="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <ImageView
