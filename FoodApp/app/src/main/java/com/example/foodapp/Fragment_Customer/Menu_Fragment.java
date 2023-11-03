@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
@@ -18,24 +16,9 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 
 public class Menu_Fragment extends Fragment {
-
-
-
    private TabLayout tabLayout;
    private ViewPager2 viewPager2;
    ViewPagerMenuAdapter adapter;
-
-
-
-
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//    }
-
-
 
 
     @Override
@@ -50,22 +33,21 @@ public class Menu_Fragment extends Fragment {
         viewPager2 = view.findViewById(R.id.paperMenu);
         tabLayout = view.findViewById(R.id.tabMenu);
 
-        adapter = new ViewPagerMenuAdapter(getActivity());
+        adapter = new ViewPagerMenuAdapter(requireActivity());
         viewPager2.setAdapter(adapter);
 
-        TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position){
-                    case 0:
-                        tab.setText("Foods");
-                        break;
-                    case 1:
-                        tab.setText("Drink");
-                        break;
-                }
+        viewPager2.setUserInputEnabled(false);
+
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+            switch (position){
+                case 0:
+                    tab.setText("Foods");
+                    break;
+                case 1:
+                    tab.setText("Drink");
+                    break;
             }
-        });mediator.attach();
+        }).attach();
 
         return view;
     }
