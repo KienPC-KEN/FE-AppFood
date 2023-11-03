@@ -46,10 +46,7 @@ public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdap
 
     @Override
     public int getItemCount() {
-        if (list != null) {
-            return list.size();
-        }
-        return 0;
+        return list != null ? list.size() : 0;
     }
 
     public void setData(List<Category> newList) {
