@@ -58,9 +58,7 @@ public class LoginActivity_Staff extends AppCompatActivity {
     private void loginStaff() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
-        String url = "http://" + IP + ":3000/api/auth/loginStaff";
-
-        StringRequest request = new StringRequest(Request.Method.POST, url,
+        StringRequest request = new StringRequest(Request.Method.POST, Config.IP + "auth/loginStaff",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
