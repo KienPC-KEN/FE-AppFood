@@ -2,65 +2,98 @@ package com.example.foodapp.Fragment_Customer;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.toolbox.StringRequest;
+import com.example.foodapp.Adapter_Customer.Menu_CategoryAdapter;
+import com.example.foodapp.Adapter_Customer.Menu_ProductAdapter;
+import com.example.foodapp.Model.Category;
+import com.example.foodapp.Model.Product;
 import com.example.foodapp.R;
+import com.example.foodapp.config.Config;
+import com.example.foodapp.config.VolleySingleton;
+import com.example.foodapp.databinding.FragmentFoodsCustomerBinding;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FoodsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class FoodsFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FoodsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FoodsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FoodsFragment newInstance(String param1, String param2) {
-        FoodsFragment fragment = new FoodsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private static final String TAG = "Food_Fragment";
+    private FragmentFoodsCustomerBinding binding;
+    private ArrayList<Category> categoryData;
+    private ArrayList<Product> productData;
+    private Menu_CategoryAdapter categoryAdapter;
+    private Menu_ProductAdapter productAdapter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_foods_customer, container, false);
+        binding = FragmentFoodsCustomerBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        categoryData = new ArrayList<>();
+
+        StringRequest getCategory = new StringRequest(Config.IP + "category", response -> {
+            categoryData = new Gson().fromJson(response, new TypeToken<ArrayList<Category>>() {
+            }.getType());
+            ArrayList<Category> listFood = new ArrayList<>();
+            Category category = new Category();
+            category.setName("All");
+            listFood.add(category);
+            for (Category c :
+                    categoryData) {
+                if (c.getType().equals("food")) {
+                    listFood.add(c);
+                }
+            }
+            categoryAdapter = new Menu_CategoryAdapter(listFood);
+            binding.rcvFoodCategoryMenu.setAdapter(categoryAdapter);
+        }, error -> {
+            Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
+        });
+
+        StringRequest getProduct = new StringRequest(Config.IP + "Product", response -> {
+            productData = new Gson().fromJson(response, new TypeToken<ArrayList<Product>>() {
+            }.getType());
+            ArrayList<Product> listFoodProduct = new ArrayList<>();
+            for (Product p :
+                    productData) {
+                if (p.getCategory().getType().equals("food")) {
+                    listFoodProduct.add(p);
+                }
+            }
+            productAdapter = new Menu_ProductAdapter(listFoodProduct);
+            binding.rcvFoodProductMenu.setAdapter(productAdapter);
+        }, error -> {
+        });
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(getCategory);
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(getProduct);
+    }
+
+    @Override
+    public void onDestroy() {
+        binding = null;
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.getRoot().requestLayout();
     }
 }

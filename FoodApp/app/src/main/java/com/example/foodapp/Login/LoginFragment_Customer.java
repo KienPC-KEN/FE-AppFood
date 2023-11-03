@@ -76,9 +76,7 @@ public class LoginFragment_Customer extends Fragment {
     private void loginCustomer() {
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
-        String url = "http://" + IP + ":3000/api/auth/loginCustomer";
-
-        StringRequest request = new StringRequest(Request.Method.POST, url,
+        StringRequest request = new StringRequest(Request.Method.POST, Config.IP + "auth/loginCustomer",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
