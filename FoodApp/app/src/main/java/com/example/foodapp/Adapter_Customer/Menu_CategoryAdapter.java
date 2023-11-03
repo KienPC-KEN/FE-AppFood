@@ -1,5 +1,6 @@
 package com.example.foodapp.Adapter_Customer;
 
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdapter.Holder> {
 
-    private final ArrayList<Category> list;
+    public ArrayList<Category> list;
     private int selectedPos = -1;
 
     public Menu_CategoryAdapter(ArrayList<Category> list) {
@@ -31,6 +32,7 @@ public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdap
         return new Holder(ItemCategoryBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.bindData(list.get(position));
