@@ -4,21 +4,22 @@ import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Model.Category;
-import com.example.foodapp.Model.Product;
+import com.example.foodapp.Util.CategoryCallBack;
 import com.example.foodapp.databinding.ItemCategoryBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdapter.Holder> {
 
     private final ArrayList<Category> list;
+    private int selectedPos = -1;
 
     public Menu_CategoryAdapter(ArrayList<Category> list) {
         this.list = list;
@@ -34,12 +35,13 @@ public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdap
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.bindData(list.get(position));
         holder.binding.tvCategoryName.setOnClickListener(v -> {
-            if(holder.binding.tvCategoryName.getTypeface() == Typeface.DEFAULT) {
-                holder.binding.tvCategoryName.setTypeface(null, Typeface.BOLD);
-            }else {
-                holder.binding.tvCategoryName.setTypeface(Typeface.DEFAULT);
-            }
+            selectedPos = holder.getAdapterPosition();
+            holder.binding.tvCategoryName.setTypeface(null, Typeface.BOLD);
+            notifyDataSetChanged();
         });
+        if (selectedPos != position) {
+            holder.binding.tvCategoryName.setTypeface(Typeface.DEFAULT);
+        }
     }
 
     @Override
@@ -48,6 +50,13 @@ public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdap
             return list.size();
         }
         return 0;
+    }
+
+    public void setData(List<Category> newList) {
+        final DiffUtil.DiffResult result = DiffUtil.calculateDiff(new CategoryCallBack(this.list, newList));
+        this.list.clear();
+        this.list.addAll(newList);
+        result.dispatchUpdatesTo(this);
     }
 
     public static class Holder extends RecyclerView.ViewHolder {
@@ -63,4 +72,6 @@ public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdap
             binding.tvCategoryName.setText(category.getName());
         }
     }
+
+
 }
