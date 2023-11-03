@@ -14,7 +14,9 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.StringRequest;
 import com.example.foodapp.Adapter_Customer.Menu_CategoryAdapter;
+import com.example.foodapp.Adapter_Customer.Menu_ProductAdapter;
 import com.example.foodapp.Model.Category;
+import com.example.foodapp.Model.Product;
 import com.example.foodapp.R;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
@@ -28,8 +30,10 @@ import java.util.stream.Collectors;
 public class DrinkFragment extends Fragment {
     private static final String TAG = "Drink_Fragment";
     private FragmentDrinkCustomerBinding binding;
-    private ArrayList<Category> list;
-    private Menu_CategoryAdapter adapter;
+    private ArrayList<Category> categoryData;
+    private ArrayList<Product> productData;
+    private Menu_CategoryAdapter categoryAdapter;
+    private Menu_ProductAdapter productAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -43,28 +47,54 @@ public class DrinkFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        list = new ArrayList<>();
+        categoryData = new ArrayList<>();
 
         StringRequest getCategory = new StringRequest(Config.IP + "category", response -> {
-            list = new Gson().fromJson(response, new TypeToken<ArrayList<Category>>(){}.getType());
+            categoryData = new Gson().fromJson(response, new TypeToken<ArrayList<Category>>(){}.getType());
             ArrayList<Category> listDrink = new ArrayList<>();
-            for (Category category:
-                 list) {
-                if(category.getType().equals("drink")) {
-                    listDrink.add(category);
+            Category category = new Category();
+            category.setName("All");
+            listDrink.add(category);
+            for (Category c:
+                    categoryData) {
+                if(c.getType().equals("drink")) {
+                    listDrink.add(c);
                 }
             }
-            adapter = new Menu_CategoryAdapter(listDrink);
-            binding.rcvDrinkMenu.setAdapter(adapter);
+            categoryAdapter = new Menu_CategoryAdapter(listDrink);
+            binding.rcvDrinkCategoryMenu.setAdapter(categoryAdapter);
         }, error -> {
             Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
         });
+
+        StringRequest getProduct = new StringRequest(Config.IP + "Product", response -> {
+            productData = new Gson().fromJson(response, new TypeToken<ArrayList<Product>>() {
+            }.getType());
+            ArrayList<Product> listDrinkProduct = new ArrayList<>();
+            for (Product p :
+                    productData) {
+                if (p.getCategory().getType().equals("drink")) {
+                    listDrinkProduct.add(p);
+                }
+            }
+            productAdapter = new Menu_ProductAdapter(listDrinkProduct);
+            binding.rcvDrinkProductMenu.setAdapter(productAdapter);
+        }, error -> {
+        });
+
         VolleySingleton.getInstance(getContext()).addToRequestQueue(getCategory);
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(getProduct);
     }
 
     @Override
     public void onDestroy() {
         binding = null;
         super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.getRoot().requestLayout();
     }
 }
