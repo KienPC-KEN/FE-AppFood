@@ -69,6 +69,7 @@ public class LoginActivity_Staff extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
 
                             JSONObject userObject = jsonObject.getJSONObject("user");
+                            String _id = userObject.getString("_id");
                             String name = userObject.getString("name");
                             String phone = userObject.getString("phone");
                             String password = userObject.getString("password");
@@ -84,6 +85,7 @@ public class LoginActivity_Staff extends AppCompatActivity {
                             // Lưu thông tin người dùng đăng nhập vào SharedPreferences
                             SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Profile", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("_id", _id);
                             editor.putString("name", name);
                             editor.putString("phone", phone);
                             editor.putString("password", password);
