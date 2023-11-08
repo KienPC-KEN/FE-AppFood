@@ -85,14 +85,15 @@ public class LoginFragment_Customer extends Fragment {
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String name = jsonObject.getString("name");
-                            String phone = jsonObject.getString("phone");
-                            String password = jsonObject.getString("password");
-                            String date = jsonObject.getString("date");
-                            String sex = jsonObject.getString("sex");
-                            String image = jsonObject.getString("image");
-                            String email = jsonObject.getString("email");
-                            String address = jsonObject.getString("address");
+                            String name = jsonObject.getJSONObject("user").getString("name");
+                            String phone = jsonObject.getJSONObject("user").getString("phone");
+                            String password = jsonObject.getJSONObject("user").getString("password");
+                            String date = jsonObject.getJSONObject("user").getString("date");
+                            String sex = jsonObject.getJSONObject("user").getString("sex");
+                            String image = jsonObject.getJSONObject("user").getString("image");
+                            String email = jsonObject.getJSONObject("user").getString("email");
+                            String address = jsonObject.getJSONObject("user").getString("address");
+                            String customerId = jsonObject.getJSONObject("customer").getString("_id");
                             // Lưu thông tin người dùng đăng nhập vào SharedPreferences
                             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", MODE_PRIVATE);
                             Editor editor = sharedPreferences.edit();
@@ -104,6 +105,7 @@ public class LoginFragment_Customer extends Fragment {
                             editor.putString("image", image);
                             editor.putString("email", email);
                             editor.putString("address", address);
+                            editor.putString("customerId", customerId);
                             editor.apply();
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
