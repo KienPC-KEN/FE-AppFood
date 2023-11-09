@@ -8,42 +8,33 @@
     android:orientation="vertical"
     >
 
-    <ListView
-        android:id="@+id/lv_menu"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvDrinkProductMenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:layout_margin="17dp"
-        android:background="#FFFFFF"
-        tools:listitem="@layout/iteam_food_menu_staff" />
+        android:background="#FFFFFF" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="60dp"
         android:gravity="center"
-        android:layout_marginBottom="80dp">
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_adddrink"
-            android:layout_width="150dp"
+            android:id="@+id/btnAddDrink"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+ add new drink"
-            android:layout_margin="10dp"
+            android:background="@drawable/shape_button2"
+            android:padding="16dp"
+            android:text="+ add new food"
             android:textColor="@color/white"
-            android:textSize="13.5dp"
-            android:background="@drawable/shape_button2"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_removedrink"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="- remove drink"
-            android:layout_margin="10dp"
-            android:textColor="@color/white"
-            android:textSize="13.5dp"
-            android:background="@drawable/shape_button2"/>
-
+            android:textSize="13.5sp" />
 
     </LinearLayout>
 
