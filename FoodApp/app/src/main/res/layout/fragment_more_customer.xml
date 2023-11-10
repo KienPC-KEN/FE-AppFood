@@ -17,6 +17,7 @@
         android:layout_marginTop="50dp"/>
 
     <TextView
+        android:id="@+id/txt_name_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nguyễn Văn A"
@@ -38,7 +39,7 @@
             android:id="@+id/txt_email_more"
             android:text="vana@gmail.com"
             android:textColor="@color/black"
-            android:textSize="20dp"/>
+            android:textSize="16sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +55,7 @@
             android:id="@+id/txt_sdt_more"
             android:text="0987632145"
             android:textColor="@color/black"
-            android:textSize="20dp"/>
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <LinearLayout
