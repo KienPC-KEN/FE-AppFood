@@ -98,7 +98,6 @@ public class LoginFragment_Customer extends Fragment {
                             // Lưu thông tin người dùng đăng nhập vào SharedPreferences
                             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", MODE_PRIVATE);
                             Editor editor = sharedPreferences.edit();
-                            editor.putString("_id", _id);
                             editor.putString("name", name);
                             editor.putString("phone", phone);
                             editor.putString("password", password);

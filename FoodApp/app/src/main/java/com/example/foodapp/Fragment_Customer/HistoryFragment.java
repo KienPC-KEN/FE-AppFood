@@ -57,7 +57,7 @@ public class HistoryFragment extends Fragment {
     }
 
     private void fetchDataFromAPI() {
-        String apiUrl = "http://" + IP + ":3000/api/order-detail/";
+        String apiUrl = "http://" + IP + "order-detail/";
         RequestQueue queue = Volley.newRequestQueue(getContext(), new HurlStack());
 
 
@@ -104,7 +104,7 @@ public class HistoryFragment extends Fragment {
                             Log.e("Lỗi", "Unknown Error");
                         }
 
-                        Toast.makeText(getContext(), "Đã xảy ra lỗi khi lấy dữ liệu từ API", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Đã xảy ra lỗi khi lấy dữ liệu từ API", Toast.LENGTH_SHORT).show();
                     }
                 }
 
