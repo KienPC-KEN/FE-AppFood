@@ -10,11 +10,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.foodapp.Adapter_Customer.HomeAdapter;
 import com.example.foodapp.Model.Product;
+import com.example.foodapp.R;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentHomeCustomerBinding;
@@ -76,8 +79,25 @@ public class Home_Fragment extends Fragment {
                     Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
         });
         VolleySingleton.getInstance(getContext()).addToRequestQueue(getProduct);
+        binding.imgCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                transaction.replace(R.id.frameLayout, new CartFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+            }
+        });
+
 
     }
+
 
     @Override
     public void onDestroy() {
