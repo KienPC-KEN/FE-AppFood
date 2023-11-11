@@ -19,8 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.StringRequest;
-import com.example.foodapp.Adapter_Customer.Menu_ProductAdapter;
-import com.example.foodapp.Add_Food_Acivity;
+import com.example.foodapp.Add_Product_Activity;
 import com.example.foodapp.Model.Product;
 import com.example.foodapp.R;
 import com.example.foodapp.adapter_staff.S_Menu_ProductAdapter;
@@ -54,7 +53,11 @@ public class Food_Staff_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btnAddFood.setOnClickListener(v -> startActivity(new Intent(getActivity(), Add_Food_Acivity.class)));
+        binding.fabCreate.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), Add_Product_Activity.class);
+            intent.putExtra("category_type", "food");
+            startActivity(intent);
+        });
 
         productData = new ArrayList<>();
 

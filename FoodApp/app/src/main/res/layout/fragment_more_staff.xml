@@ -73,11 +73,4 @@
             android:background="@drawable/logout"/>
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/frameLayout_MoreStaff">
-
-    </FrameLayout>
-
 </LinearLayout>

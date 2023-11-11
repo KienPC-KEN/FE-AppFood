@@ -34,11 +34,9 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".Add_Food_Acivity"
-            android:exported="false" />
-        <activity
-            android:name=".Add_Drink_Acivity"
-            android:exported="false" />
+            android:name=".Add_Product_Activity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

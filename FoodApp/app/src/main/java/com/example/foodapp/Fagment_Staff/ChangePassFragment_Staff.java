@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.foodapp.R;
 
@@ -31,7 +32,10 @@ public class ChangePassFragment_Staff extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, new MoreFragment_Staff())
+                        .commit();
             }
         });
         btnResert.setOnClickListener(new View.OnClickListener() {

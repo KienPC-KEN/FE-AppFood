@@ -1,41 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fagment_Staff.Drinks_Staff_Fragment"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    >
+    tools:context=".Fagment_Staff.Drinks_Staff_Fragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvDrinkProductMenu"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:background="#FFFFFF" />
+        android:layout_height="match_parent"
+        android:layout_margin="8dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCreate"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="16dp"
+        android:src="@drawable/add_24"
+        app:backgroundTint="#D83400"
+        app:tint="@color/white"
+        android:contentDescription="TODO" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnAddDrink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_button2"
-            android:padding="16dp"
-            android:text="+ add new food"
-            android:textColor="@color/white"
-            android:textSize="13.5sp" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

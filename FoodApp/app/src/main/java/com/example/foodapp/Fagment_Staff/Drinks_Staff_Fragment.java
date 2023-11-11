@@ -6,11 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,14 +19,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.StringRequest;
-import com.example.foodapp.Add_Drink_Acivity;
+import com.example.foodapp.Add_Product_Activity;
 import com.example.foodapp.Model.Product;
 import com.example.foodapp.R;
 import com.example.foodapp.adapter_staff.S_Menu_ProductAdapter;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentDrinksStaffBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -55,8 +51,11 @@ public class Drinks_Staff_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        binding.btnAddDrink.setOnClickListener(v -> startActivity(new Intent(getActivity(), Add_Drink_Acivity.class)));
+        binding.fabCreate.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), Add_Product_Activity.class);
+            intent.putExtra("category_type", "drink");
+            startActivity(intent);
+        });
 
         productData = new ArrayList<>();
 
