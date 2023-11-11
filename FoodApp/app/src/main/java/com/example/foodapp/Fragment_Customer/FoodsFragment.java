@@ -30,7 +30,9 @@ public class FoodsFragment extends Fragment {
     private static final String TAG = "Food_Fragment";
     private FragmentFoodsCustomerBinding binding;
     private ArrayList<Category> categoryData;
+    private ArrayList<Category> listFood;
     private ArrayList<Product> productData;
+    ArrayList<Product> listFoodProduct;
     private Menu_CategoryAdapter categoryAdapter;
     private Menu_ProductAdapter productAdapter;
 
@@ -48,10 +50,28 @@ public class FoodsFragment extends Fragment {
 
         categoryData = new ArrayList<>();
 
-        StringRequest getCategory = new StringRequest(Config.IP + "category", response -> {
+        getCategory();
+
+        getProduct();
+    }
+
+    @Override
+    public void onDestroy() {
+        binding = null;
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.getRoot().requestLayout();
+    }
+
+    public void getCategory() {
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(new StringRequest(Config.IP + "category", response -> {
             categoryData = new Gson().fromJson(response, new TypeToken<ArrayList<Category>>() {
             }.getType());
-            ArrayList<Category> listFood = new ArrayList<>();
+            listFood = new ArrayList<>();
             Category category = new Category();
             category.setName("All");
             listFood.add(category);
@@ -65,12 +85,14 @@ public class FoodsFragment extends Fragment {
             binding.rcvFoodCategoryMenu.setAdapter(categoryAdapter);
         }, error -> {
             Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
-        });
+        }));
+    }
 
-        StringRequest getProduct = new StringRequest(Config.IP + "Product", response -> {
+    public void getProduct() {
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(new StringRequest(Config.IP + "Product", response -> {
             productData = new Gson().fromJson(response, new TypeToken<ArrayList<Product>>() {
             }.getType());
-            ArrayList<Product> listFoodProduct = new ArrayList<>();
+            listFoodProduct = new ArrayList<>();
             for (Product p :
                     productData) {
                 if (p.getCategory().getType().equals("food")) {
@@ -80,21 +102,6 @@ public class FoodsFragment extends Fragment {
             productAdapter = new Menu_ProductAdapter(listFoodProduct);
             binding.rcvFoodProductMenu.setAdapter(productAdapter);
         }, error -> {
-        });
-
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(getCategory);
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(getProduct);
-    }
-
-    @Override
-    public void onDestroy() {
-        binding = null;
-        super.onDestroy();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        binding.getRoot().requestLayout();
+        }));
     }
 }
