@@ -83,7 +83,7 @@ public class Food_Staff_Fragment extends Fragment {
     }
 
     public void GETProduct() {
-        StringRequest getProduct = new StringRequest(Config.IP + "Product", response -> {
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(new StringRequest(Config.IP + "Product", response -> {
             productData = new Gson().fromJson(response, new TypeToken<ArrayList<Product>>() {
             }.getType());
             listFoodProduct = new ArrayList<>();
@@ -97,9 +97,7 @@ public class Food_Staff_Fragment extends Fragment {
             binding.rcvFoodProductMenu.setAdapter(adapter);
         }, error -> {
             Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
-        });
-
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(getProduct);
+        }));
     }
 
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -111,7 +109,7 @@ public class Food_Staff_Fragment extends Fragment {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
-            int pos = viewHolder.getAdapterPosition();
+            int pos = viewHolder.getAbsoluteAdapterPosition();
 
             switch (direction) {
                 case ItemTouchHelper.LEFT:

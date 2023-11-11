@@ -1,16 +1,20 @@
 package com.example.foodapp.Fagment_Staff;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,10 +35,13 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+
 
 public class Drinks_Staff_Fragment extends Fragment {
     private static final String TAG = "Staff_Drink_Fragment";
     private ArrayList<Product> productData;
+    private ArrayList<Product> listFoodProduct;
     private S_Menu_ProductAdapter adapter;
     FragmentDrinksStaffBinding binding;
 
@@ -60,6 +67,9 @@ public class Drinks_Staff_Fragment extends Fragment {
         binding.rcvDrinkProductMenu.addItemDecoration(dividerItemDecoration);
 
         GETProduct();
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(binding.rcvDrinkProductMenu);
     }
 
     @Override
@@ -75,10 +85,10 @@ public class Drinks_Staff_Fragment extends Fragment {
     }
 
     public void GETProduct() {
-        StringRequest getProduct = new StringRequest(Config.IP + "Product", response -> {
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(new StringRequest(Config.IP + "Product", response -> {
             productData = new Gson().fromJson(response, new TypeToken<ArrayList<Product>>() {
             }.getType());
-            ArrayList<Product> listFoodProduct = new ArrayList<>();
+            listFoodProduct = new ArrayList<>();
             for (Product p :
                     productData) {
                 if (p.getCategory().getType().equals("drink")) {
@@ -89,8 +99,42 @@ public class Drinks_Staff_Fragment extends Fragment {
             binding.rcvDrinkProductMenu.setAdapter(adapter);
         }, error -> {
             Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
-        });
-
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(getProduct);
+        }));
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            int pos = viewHolder.getAbsoluteAdapterPosition();
+
+            switch (direction) {
+                case ItemTouchHelper.LEFT:
+                    listFoodProduct.remove(pos);
+                    adapter.notifyItemRemoved(pos);
+                    break;
+                case ItemTouchHelper.RIGHT:
+                    break;
+            }
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+                    .addSwipeLeftActionIcon(R.drawable.delete_24)
+                    .addSwipeRightBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.green))
+                    .addSwipeRightActionIcon(R.drawable.archive_24)
+                    .create()
+                    .decorate();
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
 }
