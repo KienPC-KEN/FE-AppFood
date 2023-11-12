@@ -88,6 +88,9 @@ public class Add_Product_Activity extends AppCompatActivity {
             }
             dropDownAdapter = new CategoryDropDownAdapter(this, newCategoryData);
             binding.categoryDropdown.setAdapter(dropDownAdapter);
+            binding.categoryDropdown.setOnFocusChangeListener((v, hasFocus) -> {
+                binding.categoryDropdown.showDropDown();
+            });
         }, error -> {
             Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
         }) {
