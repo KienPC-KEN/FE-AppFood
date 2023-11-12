@@ -27,9 +27,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:id="@+id/checkboxOrder"
+                    android:layout_height="wrap_content"/>
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageProduct"
+                    android:id="@+id/imageProductOrder"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_margin="10dp"
@@ -103,7 +108,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:layout_marginLeft="350dp"
+
+
                 android:orientation="horizontal">
 
 
@@ -112,9 +119,9 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="bottom"
-                    android:padding="8dp"
+                    android:paddingBottom="10dp"
 
-                    android:src="@drawable/baseline_delete_forever_24" />
+                    android:src="@drawable/edit" />
 
 
             </LinearLayout>
