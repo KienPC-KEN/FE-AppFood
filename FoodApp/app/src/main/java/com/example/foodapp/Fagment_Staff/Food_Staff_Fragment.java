@@ -1,5 +1,7 @@
 package com.example.foodapp.Fagment_Staff;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -56,6 +58,7 @@ public class Food_Staff_Fragment extends Fragment {
         binding.fabCreate.setOnClickListener(v -> {
             Intent intent = new Intent(requireActivity(), Add_Product_Activity.class);
             intent.putExtra("category_type", "food");
+            intent.putExtra("button_type", "create");
             startActivity(intent);
         });
 
@@ -67,8 +70,6 @@ public class Food_Staff_Fragment extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
         binding.rcvFoodProductMenu.addItemDecoration(dividerItemDecoration);
 
-        GETProduct();
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(binding.rcvFoodProductMenu);
     }
@@ -76,6 +77,7 @@ public class Food_Staff_Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        GETProduct();
         binding.getRoot().requestLayout();
     }
 
@@ -120,6 +122,10 @@ public class Food_Staff_Fragment extends Fragment {
                     adapter.notifyItemRemoved(pos);
                     break;
                 case ItemTouchHelper.RIGHT:
+                    Intent intent = new Intent(requireActivity(), Add_Product_Activity.class);
+                    intent.putExtra("category_type", "food");
+                    intent.putExtra("button_type", "update");
+                    startActivity(intent);
                     break;
             }
         }

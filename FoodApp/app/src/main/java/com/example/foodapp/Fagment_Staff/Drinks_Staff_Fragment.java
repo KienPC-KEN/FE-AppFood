@@ -54,6 +54,7 @@ public class Drinks_Staff_Fragment extends Fragment {
         binding.fabCreate.setOnClickListener(v -> {
             Intent intent = new Intent(requireActivity(), Add_Product_Activity.class);
             intent.putExtra("category_type", "drink");
+            intent.putExtra("button_type", "create");
             startActivity(intent);
         });
 
@@ -65,8 +66,6 @@ public class Drinks_Staff_Fragment extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
         binding.rcvDrinkProductMenu.addItemDecoration(dividerItemDecoration);
 
-        GETProduct();
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(binding.rcvDrinkProductMenu);
     }
@@ -74,6 +73,7 @@ public class Drinks_Staff_Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        GETProduct();
         binding.getRoot().requestLayout();
     }
 
@@ -118,6 +118,10 @@ public class Drinks_Staff_Fragment extends Fragment {
                     adapter.notifyItemRemoved(pos);
                     break;
                 case ItemTouchHelper.RIGHT:
+                    Intent intent = new Intent(requireActivity(), Add_Product_Activity.class);
+                    intent.putExtra("category_type", "drink");
+                    intent.putExtra("button_type", "update");
+                    startActivity(intent);
                     break;
             }
         }
