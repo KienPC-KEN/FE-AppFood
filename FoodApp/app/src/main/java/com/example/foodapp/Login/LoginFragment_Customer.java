@@ -49,7 +49,7 @@ public class LoginFragment_Customer extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       binding.txtForgotpass.setOnClickListener(new View.OnClickListener() {
+        binding.txtForgotpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
@@ -93,8 +93,7 @@ public class LoginFragment_Customer extends Fragment {
                             String image = jsonObject.getJSONObject("user").getString("image");
                             String email = jsonObject.getJSONObject("user").getString("email");
                             String address = jsonObject.getJSONObject("user").getString("address");
-                            String customerId = jsonObject.getJSONObject("customer").getString("idUser");
-                          
+                            String customerId = jsonObject.getJSONObject("customer").getString("_id");
                             // Lưu thông tin người dùng đăng nhập vào SharedPreferences
                             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", MODE_PRIVATE);
                             Editor editor = sharedPreferences.edit();
