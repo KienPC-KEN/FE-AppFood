@@ -140,7 +140,7 @@ public class Food_Staff_Fragment extends Fragment {
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
-            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX / 5, dY, actionState, isCurrentlyActive)
                     .addSwipeLeftBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
                     .addSwipeLeftActionIcon(R.drawable.delete_24)
                     .addSwipeRightBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.green))
@@ -148,7 +148,7 @@ public class Food_Staff_Fragment extends Fragment {
                     .create()
                     .decorate();
 
-            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            super.onChildDraw(c, recyclerView, viewHolder, dX / 5, dY, actionState, isCurrentlyActive);
         }
     };
 }
