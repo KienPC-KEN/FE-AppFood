@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.foodapp.Add_Product_Activity;
 import com.example.foodapp.Model.Product;
@@ -37,7 +38,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 public class Drinks_Staff_Fragment extends Fragment {
     private static final String TAG = "Staff_Drink_Fragment";
     private ArrayList<Product> productData;
-    private ArrayList<Product> listFoodProduct;
+    private ArrayList<Product> listDrinkProduct;
     private S_Menu_ProductAdapter adapter;
     FragmentDrinksStaffBinding binding;
 
@@ -87,14 +88,14 @@ public class Drinks_Staff_Fragment extends Fragment {
         VolleySingleton.getInstance(getContext()).addToRequestQueue(new StringRequest(Config.IP + "Product", response -> {
             productData = new Gson().fromJson(response, new TypeToken<ArrayList<Product>>() {
             }.getType());
-            listFoodProduct = new ArrayList<>();
+            listDrinkProduct = new ArrayList<>();
             for (Product p :
                     productData) {
                 if (p.getCategory().getType().equals("drink")) {
-                    listFoodProduct.add(p);
+                    listDrinkProduct.add(p);
                 }
             }
-            adapter = new S_Menu_ProductAdapter(listFoodProduct);
+            adapter = new S_Menu_ProductAdapter(listDrinkProduct);
             binding.rcvDrinkProductMenu.setAdapter(adapter);
         }, error -> {
             Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
@@ -114,13 +115,19 @@ public class Drinks_Staff_Fragment extends Fragment {
 
             switch (direction) {
                 case ItemTouchHelper.LEFT:
-                    listFoodProduct.remove(pos);
-                    adapter.notifyItemRemoved(pos);
+                    VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Request.Method.DELETE, Config.IP + "product/delete/" + listDrinkProduct.get(pos).getId(), response -> {
+                        Toast.makeText(requireActivity(), "Delete successfully", Toast.LENGTH_SHORT).show();
+                        listDrinkProduct.remove(pos);
+                        adapter.notifyItemRemoved(pos);
+                        }, error -> {
+                        Toast.makeText(requireActivity(), "Create failure: " + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
+                    }));
                     break;
                 case ItemTouchHelper.RIGHT:
                     Intent intent = new Intent(requireActivity(), Add_Product_Activity.class);
                     intent.putExtra("category_type", "drink");
                     intent.putExtra("button_type", "update");
+                    intent.putExtra("product", new Gson().toJson(listDrinkProduct.get(pos)));
                     startActivity(intent);
                     break;
             }
