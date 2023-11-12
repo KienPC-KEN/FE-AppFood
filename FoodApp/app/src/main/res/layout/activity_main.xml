@@ -1,39 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:id="@+id/main">
+    tools:context=".MainActivity">
 
-
-
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/frameLayout"/>
-
-    </LinearLayout>
-
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_staff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottom_navigation_staff"
+        android:layout_gravity="bottom"
         android:background="@color/white"
-        android:layout_alignParentBottom="true"
         app:itemIconTint="@color/color_navigation"
         app:itemTextColor="@color/black"
+        app:labelVisibilityMode="selected"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         app:menu="@menu/menu_navigation"
-        tools:ignore="ExtraText,MissingConstraints"
+        app:hideOnScroll="true"/>
 
-        />
-
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

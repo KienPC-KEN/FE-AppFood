@@ -36,18 +36,11 @@ public class Menu_Fragment_Staff extends Fragment {
 
         viewPager2 = view.findViewById(R.id.paperMenustaff);
         tabLayout = view.findViewById(R.id.tabMenustaff);
-        img_rs = view.findViewById(R.id.img_rs);
 
-        img_rs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        adapter = new ViewPagerMenuStaffAdapter(getActivity());
+        adapter = new ViewPagerMenuStaffAdapter(requireActivity());
         viewPager2.setAdapter(adapter);
-        TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+        viewPager2.setUserInputEnabled(false);
+        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position){
@@ -59,7 +52,7 @@ public class Menu_Fragment_Staff extends Fragment {
                         break;
                 }
             }
-        });mediator.attach();
+        }).attach();
 
         return view;
     }

@@ -18,8 +18,7 @@ public class Add_Food_Acivity extends AppCompatActivity {
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Add_Food_Acivity.this,MainActivity.class);
-                startActivity(intent);
+                Add_Food_Acivity.super.finish();
             }
         });
     }

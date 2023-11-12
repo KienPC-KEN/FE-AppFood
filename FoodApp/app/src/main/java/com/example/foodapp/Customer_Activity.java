@@ -19,9 +19,6 @@ public class Customer_Activity extends AppCompatActivity {
 
     private ActivityCustomerBinding binding;
 
-    private BottomNavigationView bottomNavigationView;
-    FragmentManager fm = getSupportFragmentManager();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,25 +28,22 @@ public class Customer_Activity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.frameLayout, new Home_Fragment()).commit();
 
-        binding.bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.home:
-                        fm.beginTransaction().replace(R.id.frameLayout, new Home_Fragment()).commit();
-                        return true;
-                    case R.id.menu:
-                        fm.beginTransaction().replace(R.id.frameLayout, new Menu_Fragment()).commit();
-                        return true;
-                    case R.id.history:
-                        fm.beginTransaction().replace(R.id.frameLayout, new HistoryFragment()).commit();
-                        return true;
-                    case R.id.more:
-                        fm.beginTransaction().replace(R.id.frameLayout, new More_Fragment()).commit();
-                        return true;
-                }
-                return false;
+        binding.bottomNavigation.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.home:
+                    fm.beginTransaction().replace(R.id.frameLayout, new Home_Fragment()).commit();
+                    return true;
+                case R.id.menu:
+                    fm.beginTransaction().replace(R.id.frameLayout, new Menu_Fragment()).commit();
+                    return true;
+                case R.id.history:
+                    fm.beginTransaction().replace(R.id.frameLayout, new HistoryFragment()).commit();
+                    return true;
+                case R.id.more:
+                    fm.beginTransaction().replace(R.id.frameLayout, new More_Fragment()).commit();
+                    return true;
             }
+            return false;
         });
     }
 }

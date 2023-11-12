@@ -16,4 +16,6 @@
     <color name="grays">#939393</color>
 
     <color name="mautrong">#00939393</color>
+    <color name="red">#ff0000</color>
+    <color name="green">#008000</color>
 </resources>

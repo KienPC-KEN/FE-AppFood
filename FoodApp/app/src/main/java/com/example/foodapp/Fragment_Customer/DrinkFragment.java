@@ -31,7 +31,9 @@ public class DrinkFragment extends Fragment {
     private static final String TAG = "Drink_Fragment";
     private FragmentDrinkCustomerBinding binding;
     private ArrayList<Category> categoryData;
+    private ArrayList<Category> listDrink;
     private ArrayList<Product> productData;
+    private ArrayList<Product> listDrinkProduct;
     private Menu_CategoryAdapter categoryAdapter;
     private Menu_ProductAdapter productAdapter;
 
@@ -49,41 +51,9 @@ public class DrinkFragment extends Fragment {
 
         categoryData = new ArrayList<>();
 
-        StringRequest getCategory = new StringRequest(Config.IP + "category", response -> {
-            categoryData = new Gson().fromJson(response, new TypeToken<ArrayList<Category>>(){}.getType());
-            ArrayList<Category> listDrink = new ArrayList<>();
-            Category category = new Category();
-            category.setName("All");
-            listDrink.add(category);
-            for (Category c:
-                    categoryData) {
-                if(c.getType().equals("drink")) {
-                    listDrink.add(c);
-                }
-            }
-            categoryAdapter = new Menu_CategoryAdapter(listDrink);
-            binding.rcvDrinkCategoryMenu.setAdapter(categoryAdapter);
-        }, error -> {
-            Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
-        });
+        getCategory();
 
-        StringRequest getProduct = new StringRequest(Config.IP + "Product", response -> {
-            productData = new Gson().fromJson(response, new TypeToken<ArrayList<Product>>() {
-            }.getType());
-            ArrayList<Product> listDrinkProduct = new ArrayList<>();
-            for (Product p :
-                    productData) {
-                if (p.getCategory().getType().equals("drink")) {
-                    listDrinkProduct.add(p);
-                }
-            }
-            productAdapter = new Menu_ProductAdapter(listDrinkProduct);
-            binding.rcvDrinkProductMenu.setAdapter(productAdapter);
-        }, error -> {
-        });
-
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(getCategory);
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(getProduct);
+        getProduct();
     }
 
     @Override
@@ -96,5 +66,43 @@ public class DrinkFragment extends Fragment {
     public void onResume() {
         super.onResume();
         binding.getRoot().requestLayout();
+    }
+
+    public void getCategory() {
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(new StringRequest(Config.IP + "category", response -> {
+            categoryData = new Gson().fromJson(response, new TypeToken<ArrayList<Category>>() {
+            }.getType());
+            listDrink = new ArrayList<>();
+            Category category = new Category();
+            category.setName("All");
+            listDrink.add(category);
+            for (Category c :
+                    categoryData) {
+                if (c.getType().equals("drink")) {
+                    listDrink.add(c);
+                }
+            }
+            categoryAdapter = new Menu_CategoryAdapter(listDrink);
+            binding.rcvDrinkCategoryMenu.setAdapter(categoryAdapter);
+        }, error -> {
+            Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
+        }));
+    }
+
+    public void getProduct() {
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(new StringRequest(Config.IP + "Product", response -> {
+            productData = new Gson().fromJson(response, new TypeToken<ArrayList<Product>>() {
+            }.getType());
+            listDrinkProduct = new ArrayList<>();
+            for (Product p :
+                    productData) {
+                if (p.getCategory().getType().equals("drink")) {
+                    listDrinkProduct.add(p);
+                }
+            }
+            productAdapter = new Menu_ProductAdapter(listDrinkProduct);
+            binding.rcvDrinkProductMenu.setAdapter(productAdapter);
+        }, error -> {
+        }));
     }
 }
