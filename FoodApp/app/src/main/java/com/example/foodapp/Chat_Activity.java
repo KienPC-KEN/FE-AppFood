@@ -13,6 +13,7 @@ public class Chat_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        //ádasdasda
 
         ImageView img_back = findViewById(R.id.img_back);
         img_back.setOnClickListener(new View.OnClickListener() {
