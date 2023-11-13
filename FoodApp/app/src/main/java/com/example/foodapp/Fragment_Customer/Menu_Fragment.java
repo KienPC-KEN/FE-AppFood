@@ -1,9 +1,11 @@
 package com.example.foodapp.Fragment_Customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -12,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.foodapp.Adapter_Customer.ViewPagerMenuAdapter;
+import com.example.foodapp.Chat_Activity;
 import com.example.foodapp.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -52,6 +55,14 @@ public class Menu_Fragment extends Fragment {
 
         adapter = new ViewPagerMenuAdapter(getActivity());
         viewPager2.setAdapter(adapter);
+        ImageView imgphone = view.findViewById(R.id.img_phone);
+        imgphone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Chat_Activity.class); // Thay TargetActivity bằng tên của Activity mục tiêu
+                startActivity(intent);
+            }
+        });
 
         TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
