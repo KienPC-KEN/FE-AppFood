@@ -85,6 +85,7 @@ public class LoginFragment_Customer extends Fragment {
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            String _id = jsonObject.getJSONObject("user").getString("_id");
                             String name = jsonObject.getJSONObject("user").getString("name");
                             String phone = jsonObject.getJSONObject("user").getString("phone");
                             String password = jsonObject.getJSONObject("user").getString("password");
@@ -97,6 +98,7 @@ public class LoginFragment_Customer extends Fragment {
                             // Lưu thông tin người dùng đăng nhập vào SharedPreferences
                             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", MODE_PRIVATE);
                             Editor editor = sharedPreferences.edit();
+                            editor.putString("_id", _id);
                             editor.putString("name", name);
                             editor.putString("phone", phone);
                             editor.putString("password", password);
