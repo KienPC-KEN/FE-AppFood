@@ -31,24 +31,26 @@ public class Customer_Activity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.frameLayout, new Home_Fragment()).commit();
 
+        binding.bottomNavigation.getMenu().findItem(R.id.category).setVisible(false);
+
         binding.bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.home:
                         fm.beginTransaction().replace(R.id.frameLayout, new Home_Fragment()).commit();
-                        return true;
+                        break;
                     case R.id.menu:
                         fm.beginTransaction().replace(R.id.frameLayout, new Menu_Fragment()).commit();
-                        return true;
+                        break;
                     case R.id.history:
                         fm.beginTransaction().replace(R.id.frameLayout, new HistoryFragment()).commit();
-                        return true;
+                        break;
                     case R.id.more:
                         fm.beginTransaction().replace(R.id.frameLayout, new More_Fragment()).commit();
-                        return true;
+                        break;
                 }
-                return false;
+                return true;
             }
         });
     }
