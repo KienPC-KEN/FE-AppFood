@@ -1,7 +1,5 @@
 package com.example.foodapp.Fagment_Staff;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -25,7 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.foodapp.Add_Product_Activity;
 import com.example.foodapp.Model.Product;
 import com.example.foodapp.R;
-import com.example.foodapp.adapter_staff.S_Menu_ProductAdapter;
+import com.example.foodapp.adapter_staff.StaffMenuProductAdapter;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentFoodStaffBinding;
@@ -41,7 +39,7 @@ public class Food_Staff_Fragment extends Fragment {
     private static final String TAG = "Staff_Food_Fragment";
     private ArrayList<Product> productData;
     private ArrayList<Product> listFoodProduct;
-    private S_Menu_ProductAdapter adapter;
+    private StaffMenuProductAdapter adapter;
     private FragmentFoodStaffBinding binding;
 
     @Override
@@ -99,7 +97,7 @@ public class Food_Staff_Fragment extends Fragment {
                     listFoodProduct.add(p);
                 }
             }
-            adapter = new S_Menu_ProductAdapter(listFoodProduct);
+            adapter = new StaffMenuProductAdapter(listFoodProduct);
             binding.rcvFoodProductMenu.setAdapter(adapter);
         }, error -> {
             Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
