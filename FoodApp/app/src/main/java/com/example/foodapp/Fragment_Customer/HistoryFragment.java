@@ -2,6 +2,8 @@ package com.example.foodapp.Fragment_Customer;
 
 import static com.example.foodapp.config.Config.IP;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,23 +43,31 @@ import java.util.Map;
 public class HistoryFragment extends Fragment {
     private ArrayList<Map<String, String>> orderDetails = new ArrayList<>();
     OrderDetailAdapter adapter;
+    int totalPriceOrder;
+    int totalDisOrder;
+
+    int totalCount;
+    String customerId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.history_fragment, container, false);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE);
+        customerId = sharedPreferences.getString("customerId", "");
 
         RecyclerView recyclerView = view.findViewById(R.id.lvItem);
-         adapter = new OrderDetailAdapter(getContext(), orderDetails);
+        adapter = new OrderDetailAdapter(getContext(), orderDetails);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-       
-        fetchDataFromAPI();
+
+        fetchDataFromAPI(customerId);
 
         return view;
     }
 
-    private void fetchDataFromAPI() {
-        String apiUrl = "http://" + IP + ":3000/api/order-detail/";
+    private void fetchDataFromAPI(String idCustomer) {
+        String apiUrl = IP + "order-detail/"+idCustomer;
         RequestQueue queue = Volley.newRequestQueue(getContext(), new HurlStack());
 
 
@@ -68,17 +78,40 @@ public class HistoryFragment extends Fragment {
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             for (int i = 0; i < jsonArray.length(); i++) {
+                                totalPriceOrder = 0;
+                                totalCount = 0;
+                                totalDisOrder = 0;
                                 JSONObject orderDetailObject = jsonArray.getJSONObject(i);
                                 Map<String, String> orderDetailMap = new HashMap<>();
                                 orderDetailMap.put("orderItem", orderDetailObject.getString("name"));
-                                orderDetailMap.put("count", orderDetailObject.getJSONArray("idOrderItem").getJSONObject(0).getString("quantity"));
-                                orderDetailMap.put("price", orderDetailObject.getJSONArray("idOrderItem").getJSONObject(0).getJSONObject("idProduct").getString("price"));
-//                                orderDetailMap.put("discount", orderDetailObject.getJSONArray("idOrderItem").getJSONObject(0).getJSONObject("idProduct").getString("discount"));
-                                orderDetailMap.put("discount", "10000");
+
+
+
+                                JSONArray idOrderItemArray = orderDetailObject.getJSONArray("idOrderItem");
+
+                                for (int j = 0; j < idOrderItemArray.length(); j++) {
+                                    JSONObject orderItemObject = idOrderItemArray.getJSONObject(j);
+                                    int price = orderItemObject.getJSONObject("idProduct").getInt("price");
+                                    int quantityOrder = orderItemObject.getInt("quantity");
+                                    totalPriceOrder += price*quantityOrder;
+                                }
+                                orderDetailMap.put("price", String.valueOf(totalPriceOrder));
+                                for (int j = 0; j < idOrderItemArray.length(); j++) {
+                                    JSONObject orderDetailObject1 = idOrderItemArray.getJSONObject(j);
+                                    int count = orderDetailObject1.getInt("quantity");
+                                    totalCount += count;
+                                }
+
+                                orderDetailMap.put("count", String.valueOf(totalCount));
+                                orderDetailMap.put("totalPrice", orderDetailObject.getString("totalPrice"));
+                                orderDetailMap.put("createAt", orderDetailObject.getString("createdAt"));
+
+
+
                                 orderDetails.add(orderDetailMap);
                             }
 
-                           
+
                             adapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -89,7 +122,7 @@ public class HistoryFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Lỗi", "Lỗi khi lấy dữ liệu từ API: " + error.toString());
-                        
+
                         if (error instanceof TimeoutError) {
                             Log.e("Lỗi", "Timeout Error");
                         } else if (error instanceof NoConnectionError) {
@@ -104,12 +137,12 @@ public class HistoryFragment extends Fragment {
                             Log.e("Lỗi", "Unknown Error");
                         }
 
-                        Toast.makeText(getContext(), "Đã xảy ra lỗi khi lấy dữ liệu từ API", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Đã xảy ra lỗi khi lấy dữ liệu từ API", Toast.LENGTH_SHORT).show();
                     }
                 }
 
         );
-        int timeout = 10000;  
+        int timeout = 10000;
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                 timeout,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -122,4 +155,3 @@ public class HistoryFragment extends Fragment {
     }
 
 }
-

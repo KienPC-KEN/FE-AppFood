@@ -1,85 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:id="@+id/frgmenu">
+    android:id="@+id/frgmenu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-    <ImageView
+    <View
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/banner_staff"
-        android:scaleType="fitXY"
-        />
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/sv_foods"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/shape_search"
-        android:iconifiedByDefault="false"
-        app:queryHint="Seacrch foods"
-        />
+        android:background="@drawable/banner_staff"
+        android:scaleType="fitXY" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/vie_bg"
-        android:layout_marginTop="180dp"
-        >
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Availabe Dishes"
-                android:textSize="28dp"
-                android:textColor="@color/black"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                />
-
-            <ImageView
-                android:id="@+id/img_rs"
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:layout_marginTop="13dp"
-                android:src="@drawable/ic_rs"/>
-        </LinearLayout>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/sv_foods"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/shape_search" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabMenustaff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabSelectedTextColor="#DE3905"
-            />
+            android:background="@drawable/vie_bg"
+            app:tabSelectedTextColor="#DE3905" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/paperMenustaff"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
-
-        
-
+            android:background="@color/white" />
 
     </LinearLayout>
-
-
-
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 
