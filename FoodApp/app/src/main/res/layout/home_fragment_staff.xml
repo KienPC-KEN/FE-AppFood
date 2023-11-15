@@ -70,6 +70,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/Total_Revenue"
                     android:layout_gravity="center"
                     android:textSize="20sp"
                     android:textColor="@color/black"
@@ -91,6 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:id="@+id/Total_bill"
                     android:textSize="20dp"
                     android:textColor="@color/black"
                     android:text="2"/>
@@ -100,6 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
+            android:id="@+id/rvHomeStaff"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:background="@drawable/rouded_listview"
             tools:listitem="@layout/item_receipt"/>
