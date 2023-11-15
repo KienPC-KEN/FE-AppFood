@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.foodapp.Model.Category;
 import com.example.foodapp.R;
@@ -94,8 +95,13 @@ public class StaffCategoryFragment extends Fragment {
             int position = viewHolder.getAbsoluteAdapterPosition();
             switch (direction) {
                 case ItemTouchHelper.LEFT:
-                    categoryData.remove(position);
-                    adapter.notifyItemRemoved(position);
+                    VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Request.Method.DELETE, Config.IP + "category/deleteCategory/" + categoryData.get(position).getId(), response -> {
+                        Toast.makeText(requireActivity(), "Delete completed", Toast.LENGTH_SHORT).show();
+                        categoryData.remove(position);
+                        adapter.notifyItemRemoved(position);
+                    }, error -> {
+                        Toast.makeText(requireActivity(), "onFailure: " + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
+                    }));
                     break;
                 case ItemTouchHelper.RIGHT:
                     Fragment fragment = new CreateCategoryFragment();
