@@ -52,8 +52,7 @@ public class DrinkFragment extends Fragment {
         categoryData = new ArrayList<>();
 
         getCategory();
-
-        getProduct();
+        getProduct(null);
     }
 
     @Override
@@ -82,21 +81,25 @@ public class DrinkFragment extends Fragment {
                     listDrink.add(c);
                 }
             }
-            categoryAdapter = new Menu_CategoryAdapter(listDrink);
+            categoryAdapter = new Menu_CategoryAdapter(listDrink, idCategory -> {
+                getProduct(idCategory);
+            });
             binding.rcvDrinkCategoryMenu.setAdapter(categoryAdapter);
         }, error -> {
             Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
         }));
     }
 
-    public void getProduct() {
+    public void getProduct(String idCategory) {
         VolleySingleton.getInstance(getContext()).addToRequestQueue(new StringRequest(Config.IP + "Product", response -> {
             productData = new Gson().fromJson(response, new TypeToken<ArrayList<Product>>() {
             }.getType());
             listDrinkProduct = new ArrayList<>();
             for (Product p :
                     productData) {
-                if (p.getCategory().getType().equals("drink")) {
+                if (p.getCategory().getType().equals("drink") && idCategory == null) {
+                    listDrinkProduct.add(p);
+                } else if (p.getCategory().getType().equals("drink") && p.getCategory().getId().equals(idCategory)){
                     listDrinkProduct.add(p);
                 }
             }

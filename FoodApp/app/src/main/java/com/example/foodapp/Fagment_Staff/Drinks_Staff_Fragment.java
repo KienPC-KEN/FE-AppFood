@@ -23,7 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.foodapp.Add_Product_Activity;
 import com.example.foodapp.Model.Product;
 import com.example.foodapp.R;
-import com.example.foodapp.adapter_staff.S_Menu_ProductAdapter;
+import com.example.foodapp.adapter_staff.StaffMenuProductAdapter;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentDrinksStaffBinding;
@@ -39,7 +39,7 @@ public class Drinks_Staff_Fragment extends Fragment {
     private static final String TAG = "Staff_Drink_Fragment";
     private ArrayList<Product> productData;
     private ArrayList<Product> listDrinkProduct;
-    private S_Menu_ProductAdapter adapter;
+    private StaffMenuProductAdapter adapter;
     FragmentDrinksStaffBinding binding;
 
     @Override
@@ -95,7 +95,7 @@ public class Drinks_Staff_Fragment extends Fragment {
                     listDrinkProduct.add(p);
                 }
             }
-            adapter = new S_Menu_ProductAdapter(listDrinkProduct);
+            adapter = new StaffMenuProductAdapter(listDrinkProduct);
             binding.rcvDrinkProductMenu.setAdapter(adapter);
         }, error -> {
             Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
@@ -136,7 +136,7 @@ public class Drinks_Staff_Fragment extends Fragment {
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
-            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX / 5, dY, actionState, isCurrentlyActive)
                     .addSwipeLeftBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
                     .addSwipeLeftActionIcon(R.drawable.delete_24)
                     .addSwipeRightBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.green))
@@ -144,7 +144,7 @@ public class Drinks_Staff_Fragment extends Fragment {
                     .create()
                     .decorate();
 
-            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            super.onChildDraw(c, recyclerView, viewHolder, dX / 5, dY, actionState, isCurrentlyActive);
         }
     };
 }

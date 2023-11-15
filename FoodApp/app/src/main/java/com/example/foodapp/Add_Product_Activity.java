@@ -63,7 +63,7 @@ public class Add_Product_Activity extends AppCompatActivity {
             binding.edtDescription.setText(product.getDescription());
 
             binding.btnCreateProduct.setOnClickListener(v -> {
-                updateProduct(product.getId(), product.getName(), product.getCategory().getId(), String.valueOf(product.getQuantity()), String.valueOf(product.getPrice()), product.getImage(), product.getDescription());
+                updateProduct(product.getId());
             });
         }
 
@@ -123,7 +123,7 @@ public class Add_Product_Activity extends AppCompatActivity {
         });
     }
 
-    public void updateProduct(String productId, String name, String idCategory, String quantity, String price, String image, String description) {
+    public void updateProduct(String productId) {
         VolleySingleton.getInstance(this).addToRequestQueue(new StringRequest(Request.Method.PUT, Config.IP + "product/update/" + productId, response -> {
             Toast.makeText(this, "Create successfully", Toast.LENGTH_SHORT).show();
             super.finish();
