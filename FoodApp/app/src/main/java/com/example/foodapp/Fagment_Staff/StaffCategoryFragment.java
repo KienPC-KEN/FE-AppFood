@@ -1,12 +1,16 @@
 package com.example.foodapp.Fagment_Staff;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.StringRequest;
 import com.example.foodapp.Model.Category;
+import com.example.foodapp.R;
 import com.example.foodapp.adapter_staff.StaffCategoryAdapter;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
@@ -24,15 +29,18 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+
 public class StaffCategoryFragment extends Fragment {
     private FragmentStaffCategoryBinding binding;
     private ArrayList<Category> categoryData;
     private StaffCategoryAdapter adapter;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding =  FragmentStaffCategoryBinding.inflate(inflater, container, false);
+        binding = FragmentStaffCategoryBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -46,6 +54,9 @@ public class StaffCategoryFragment extends Fragment {
         binding.rcvStaffCategory.setLayoutManager(layoutManager);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
         binding.rcvStaffCategory.addItemDecoration(itemDecoration);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(binding.rcvStaffCategory);
 
         getCategory();
     }
@@ -66,4 +77,29 @@ public class StaffCategoryFragment extends Fragment {
             Toast.makeText(getContext(), "onFailure: " + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
         }));
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            super.onChildDraw(c, recyclerView, viewHolder, dX / 5, dY, actionState, isCurrentlyActive);
+
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX / 5, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+                    .addSwipeLeftActionIcon(R.drawable.delete_24)
+                    .addSwipeRightBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.green))
+                    .addSwipeRightActionIcon(R.drawable.archive_24)
+                    .create()
+                    .decorate();
+        }
+    };
 }
