@@ -20,11 +20,17 @@ import java.util.List;
 public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdapter.Holder> {
 
     public ArrayList<Category> list;
-    public ArrayList<Product> productList;
     private int selectedPos = -1;
 
-    public Menu_CategoryAdapter(ArrayList<Category> list) {
+    public interface OnItemClick {
+        void onClick(String idCategory);
+    }
+
+    private OnItemClick onItemClick;
+
+    public Menu_CategoryAdapter(ArrayList<Category> list, OnItemClick onItemClick) {
         this.list = list;
+        this.onItemClick = onItemClick;
     }
 
     @NonNull
@@ -38,8 +44,9 @@ public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdap
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.bindData(list.get(position));
         holder.binding.tvCategoryName.setOnClickListener(v -> {
-            selectedPos = holder.getAdapterPosition();
+            selectedPos = holder.getAbsoluteAdapterPosition();
             holder.binding.tvCategoryName.setTypeface(null, Typeface.BOLD);
+            onItemClick.onClick(list.get(position).getId());
             notifyDataSetChanged();
         });
         if (selectedPos != position) {

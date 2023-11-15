@@ -11,18 +11,18 @@ import com.example.foodapp.databinding.ItemFoodMenuStaffBinding;
 
 import java.util.ArrayList;
 
-public class S_Menu_ProductAdapter extends RecyclerView.Adapter<S_Menu_ProductAdapter.Holder> {
+public class StaffMenuProductAdapter extends RecyclerView.Adapter<StaffMenuProductAdapter.Holder> {
 
     public ArrayList<Product> list;
 
-    public S_Menu_ProductAdapter(ArrayList<Product> list) {
+    public StaffMenuProductAdapter(ArrayList<Product> list) {
         this.list = list;
     }
 
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new S_Menu_ProductAdapter.Holder(ItemFoodMenuStaffBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new StaffMenuProductAdapter.Holder(ItemFoodMenuStaffBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
