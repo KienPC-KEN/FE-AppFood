@@ -41,7 +41,7 @@ public class MoreFragment_Staff extends Fragment {
         txtEmail = view.findViewById(R.id.txtEmailStaff);
         txtPhone = view.findViewById(R.id.txtPhoneStaff);
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("More", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE);
         String name = sharedPreferences.getString("name", "");
         String email = sharedPreferences.getString("email", "");
         String phone = sharedPreferences.getString("phone", "");

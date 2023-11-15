@@ -49,7 +49,7 @@ public class ProfileFragment_Staff extends Fragment {
     }
 
     private void getDataUserStaff() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE);
         String name = sharedPreferences.getString("name", "");
         String phone = sharedPreferences.getString("phone", "");
         String date = sharedPreferences.getString("date", "");
