@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
     <ImageView
         android:layout_width="100dp"
@@ -21,21 +21,33 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
     <TextView
+        android:id="@+id/idten"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:text="Riaz Marceloz"/>
-        <TextView
+       <ImageView
+           android:id="@+id/editmng"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/edit"
+           android:clickable="true"/>
+        <ImageView
+            android:id="@+id/deletemng"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/star"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="end"
-            android:text="4.5"/>
+            android:src="@drawable/baseline_delete_24"/>
+        <Button
+            android:id="@+id/btntesst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test"
+            android:clickable="true"/>
     </LinearLayout>
         <TextView
+            android:id="@+id/idgioitinh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
