@@ -1,5 +1,6 @@
 package com.example.foodapp.Fagment_Staff;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 
@@ -7,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,7 +34,7 @@ import java.util.ArrayList;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class StaffCategoryFragment extends Fragment {
-    private FragmentStaffCategoryBinding binding;
+    public FragmentStaffCategoryBinding binding;
     private ArrayList<Category> categoryData;
     private StaffCategoryAdapter adapter;
 
@@ -50,6 +52,10 @@ public class StaffCategoryFragment extends Fragment {
 
         categoryData = new ArrayList<>();
 
+        binding.fabCreate.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CreateCategoryFragment()).commit();
+        });
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireActivity());
         binding.rcvStaffCategory.setLayoutManager(layoutManager);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
@@ -62,9 +68,8 @@ public class StaffCategoryFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        binding = null;
-        super.onDestroy();
+    public void onResume() {
+        super.onResume();
     }
 
     public void getCategory() {
@@ -86,7 +91,20 @@ public class StaffCategoryFragment extends Fragment {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
+            int position = viewHolder.getAbsoluteAdapterPosition();
+            switch (direction) {
+                case ItemTouchHelper.LEFT:
+                    categoryData.remove(position);
+                    adapter.notifyItemRemoved(position);
+                    break;
+                case ItemTouchHelper.RIGHT:
+                    Fragment fragment = new CreateCategoryFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("category", new Gson().toJson(categoryData.get(position)));
+                    fragment.setArguments(bundle);
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+                    break;
+            }
         }
 
         @Override
