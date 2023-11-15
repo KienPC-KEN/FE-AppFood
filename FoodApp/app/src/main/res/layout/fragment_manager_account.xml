@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ad1"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
@@ -69,6 +70,7 @@
             android:text="recent"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcystaff"
     android:layout_width="match_parent"
     android:layout_marginTop="10dp"
     android:layout_height="340dp"
