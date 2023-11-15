@@ -67,7 +67,8 @@ public class HistoryFragment extends Fragment {
     }
 
     private void fetchDataFromAPI(String idCustomer) {
-        String apiUrl = IP + "order-detail/"+idCustomer;
+        String apiUrl = IP + "order-detail/" + idCustomer;
+        Log.e("idCustomer", "fetchDataFromAPI: " + idCustomer);
         RequestQueue queue = Volley.newRequestQueue(getContext(), new HurlStack());
 
 
@@ -86,14 +87,21 @@ public class HistoryFragment extends Fragment {
                                 orderDetailMap.put("orderItem", orderDetailObject.getString("name"));
 
 
-
                                 JSONArray idOrderItemArray = orderDetailObject.getJSONArray("idOrderItem");
 
                                 for (int j = 0; j < idOrderItemArray.length(); j++) {
                                     JSONObject orderItemObject = idOrderItemArray.getJSONObject(j);
-                                    int price = orderItemObject.getJSONObject("idProduct").getInt("price");
-                                    int quantityOrder = orderItemObject.getInt("quantity");
-                                    totalPriceOrder += price*quantityOrder;
+
+
+                                    if (!orderItemObject.isNull("idProduct")) {
+                                        JSONObject idProductObject = orderItemObject.getJSONObject("idProduct");
+
+                                        if (idProductObject.has("price")) {
+                                            int price = idProductObject.getInt("price");
+                                            int quantityOrder = orderItemObject.getInt("quantity");
+                                            totalPriceOrder += price * quantityOrder;
+                                        }
+                                    }
                                 }
                                 orderDetailMap.put("price", String.valueOf(totalPriceOrder));
                                 for (int j = 0; j < idOrderItemArray.length(); j++) {
@@ -105,7 +113,6 @@ public class HistoryFragment extends Fragment {
                                 orderDetailMap.put("count", String.valueOf(totalCount));
                                 orderDetailMap.put("totalPrice", orderDetailObject.getString("totalPrice"));
                                 orderDetailMap.put("createAt", orderDetailObject.getString("createdAt"));
-
 
 
                                 orderDetails.add(orderDetailMap);

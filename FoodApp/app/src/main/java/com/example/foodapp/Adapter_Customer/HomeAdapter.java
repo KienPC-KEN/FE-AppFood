@@ -43,7 +43,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
             @Override
             public void onClick(View view) {
 
-                Product selectedProduct = list.get(position);
+                Product selectedProduct = list.get(holder.getAbsoluteAdapterPosition());
 
 
                 BuyingFood_Fragment buyingFoodFragment = new BuyingFood_Fragment();
