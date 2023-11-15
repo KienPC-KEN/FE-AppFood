@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
     <TextView
-        android:id="@+id/kushal_yadh"
+        android:id="@+id/tvNameCustomer"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:text="Phùng Chí Kiên"
@@ -39,7 +39,7 @@
             android:gravity="center_vertical"
             />
         <TextView
-            android:id="@+id/m8g9_f5x_la"
+            android:id="@+id/tvAddressCustomer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -58,7 +58,7 @@
             android:gravity="center_vertical"
             />
         <TextView
-            android:id="@+id/nb_detail"
+            android:id="@+id/tvPhoneCustomer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/tsuma"
+            android:id="@+id/tvNameOrder"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Tsura Maki"
@@ -197,7 +197,7 @@
             android:layout_marginLeft="50dp"
             />
         <TextView
-            android:id="@+id/total_price"
+            android:id="@+id/tv_total_price_Staff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
