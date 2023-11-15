@@ -1,18 +1,15 @@
 package com.example.foodapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
 
 import com.example.foodapp.Fagment_Staff.Menu_Fragment_Staff;
 import com.example.foodapp.Fagment_Staff.MoreFragment_Staff;
 import com.example.foodapp.Fagment_Staff.Home_Fragment;
-import com.example.foodapp.Fagment_Staff.ReceiptFragment;
 import com.example.foodapp.Fagment_Staff.StaffCategoryFragment;
 import com.example.foodapp.Util.BottomNavigationViewBehavior;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomNavigationView.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationViewBehavior());
-
+        bottomNavigationView.getMenu().findItem(R.id.history).setVisible(false);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home:
@@ -43,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.menu:
                     fm.beginTransaction().replace(R.id.frameLayout, new Menu_Fragment_Staff()).commit();
-                    break;
-                case R.id.history:
-                    fm.beginTransaction().replace(R.id.frameLayout, new ReceiptFragment()).commit();
                     break;
                 case R.id.more:
                     fm.beginTransaction().replace(R.id.frameLayout, new MoreFragment_Staff()).commit();

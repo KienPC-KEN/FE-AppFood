@@ -8,19 +8,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.R;
-import com.example.foodapp.databinding.ItemHomeStaffBinding;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
 
     @NonNull
     @Override
     public HomeAdapter.HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return  new HomeViewHolder(ItemHomeStaffBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false))  ;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_receipt, parent, false);
+
+        HomeViewHolder viewHolder = new HomeViewHolder(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeAdapter.HomeViewHolder holder, int position) {
-        holder.binding.phoneCustomer.setText("HEHEHE");
+
     }
 
     @Override
@@ -29,9 +32,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
-        private ItemHomeStaffBinding binding;
-        public HomeViewHolder(@NonNull ItemHomeStaffBinding binding) {
-            super(binding.getRoot());
+        public HomeViewHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }

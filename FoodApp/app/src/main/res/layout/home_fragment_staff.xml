@@ -19,14 +19,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Chào quản lý"
+            android:text="Hi Staff,"
             android:textSize="24dp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Xem đơn đặt hàng của khách hàng"
+            android:text="see the receipt"
             android:textSize="16dp"
             android:textColor="#DE3905"/>
     </LinearLayout>
@@ -36,22 +36,73 @@
         android:layout_height="match_parent"
         android:background="@drawable/rouded_listview"
         android:orientation="vertical"
-        android:layout_marginTop="182dp">
-        <TextView
+        android:layout_marginTop="182dp"
+        android:padding="8sp">
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8sp"
+                android:text="Today's receipts"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đơn hàng hôm nay"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="24dp"
-            android:textStyle="bold"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:background="#EDEBEB">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Total revenue"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:text="80.000VND"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:layout_marginLeft="50dp"
+                android:background="#EDEBEB">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Total bill"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:text="2"/>
+            </LinearLayout>
+        </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layoutDirection="ltr"
-            tools:listitem="@layout/item_home_staff"/>
+            android:background="@drawable/rouded_listview"
+            tools:listitem="@layout/item_receipt"/>
 
     </LinearLayout>
 </RelativeLayout>
