@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.foodapp.Login.LoginActivity;
+import com.example.foodapp.Login.LoginActivity_Staff;
 import com.example.foodapp.R;
 
 public class MoreFragment_Staff extends Fragment {
@@ -46,6 +47,11 @@ public class MoreFragment_Staff extends Fragment {
         String email = sharedPreferences.getString("email", "");
         String phone = sharedPreferences.getString("phone", "");
         String image = sharedPreferences.getString("image", "");
+        String role = sharedPreferences.getString("role", "");
+
+        if(role.equals("staff")) {
+            manager_acc.setVisibility(View.GONE);
+        }
 
         txtName.setText(name);
         txtEmail.setText(email);
@@ -87,7 +93,7 @@ public class MoreFragment_Staff extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), LoginActivity_Staff.class);
                 startActivity(intent);
             }
         });
