@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.foodapp.Model.Staff;
 import com.example.foodapp.R;
@@ -25,6 +26,7 @@ import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentManagerAccountBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,6 +40,7 @@ public class ManagerAccountFragment extends Fragment {
     private static final String TAG = "ManagerAccountFragment";
     public FragmentManagerAccountBinding binding;
     public ArrayList<Staff> staffData;
+    public List<Staff> newStaff;
     public StaffAdapter adapter;
 
     @Override
@@ -72,7 +75,7 @@ public class ManagerAccountFragment extends Fragment {
                 staffData = new Gson().fromJson(jsonArray, new TypeToken<ArrayList<Staff>>() {
                 }.getType());
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    List<Staff> newStaff = staffData.stream().filter(staff -> !"admin".equals(staff.getRole())).collect(Collectors.toList());
+                    newStaff = staffData.stream().filter(staff -> !"admin".equals(staff.getRole())).collect(Collectors.toList());
                     adapter = new StaffAdapter((ArrayList<Staff>) newStaff);
                     binding.rcvStaff.setAdapter(adapter);
                 }
@@ -92,7 +95,27 @@ public class ManagerAccountFragment extends Fragment {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAbsoluteAdapterPosition();
 
+            switch (direction) {
+                case ItemTouchHelper.LEFT:
+                    Log.d(TAG, "onSwiped: " + newStaff.get(position).getUser().getId());
+                    VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Request.Method.DELETE, Config.IP + "staff/deleteStaff/" + newStaff.get(position).getUser().getId(), response -> {
+                        Toast.makeText(requireActivity(), "onSuccess!", Toast.LENGTH_SHORT).show();
+                        newStaff.remove(position);
+                        adapter.notifyItemRemoved(position);
+                    }, error -> {
+                        Toast.makeText(requireActivity(), "onFailure: " + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
+                    }));
+                    break;
+                case ItemTouchHelper.RIGHT:
+                    Fragment fragment = new AddAccountSatff_Fragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("staff", new Gson().toJson(newStaff.get(position)));
+                    fragment.setArguments(bundle);
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+                    break;
+            }
         }
 
         @Override
@@ -107,7 +130,7 @@ public class ManagerAccountFragment extends Fragment {
                     .addSwipeRightBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.green))
                     .addSwipeRightActionIcon(R.drawable.archive_24)
                     .addSwipeRightLabel("Update")
-                    .setSwipeRightLabelColor(ContextCompat.getColor(requireActivity(),R.color.white))
+                    .setSwipeRightLabelColor(ContextCompat.getColor(requireActivity(), R.color.white))
                     .create()
                     .decorate();
         }
