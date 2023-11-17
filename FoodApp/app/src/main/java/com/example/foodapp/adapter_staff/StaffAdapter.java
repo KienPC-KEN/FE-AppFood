@@ -7,16 +7,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodapp.Model.User;
+import com.example.foodapp.Model.Staff;
 import com.example.foodapp.databinding.ItemManagerAccountBinding;
 
 import java.util.ArrayList;
 
 public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> {
 
-    public ArrayList<User> list;
+    public ArrayList<Staff> list;
 
-    public StaffAdapter(ArrayList<User> list) {
+    public StaffAdapter(ArrayList<Staff> list) {
         this.list = list;
     }
 
@@ -44,10 +44,10 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
             this.binding = binding;
         }
 
-        void bindData(User user) {
-            binding.tvEmail.setText(user.getEmail());
-            binding.tvName.setText(user.getName());
-            binding.tvPhone.setText(user.getPhone());
+        void bindData(Staff staff) {
+            binding.tvEmail.setText(staff.getUser().getEmail());
+            binding.tvName.setText(staff.getUser().getName());
+            binding.tvPhone.setText(staff.getUser().getPhone());
         }
     }
 }
