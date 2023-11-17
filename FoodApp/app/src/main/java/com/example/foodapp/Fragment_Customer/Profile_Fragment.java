@@ -15,12 +15,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.example.foodapp.Fagment_Staff.MoreFragment_Staff;
 import com.example.foodapp.R;
+import com.example.foodapp.config.Config;
+import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentProfileBinding;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,7 +53,7 @@ public class Profile_Fragment extends Fragment {
         binding.imgBack.setOnClickListener(v -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new More_Fragment()).commit());
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString("id", "");
+        String id = sharedPreferences.getString("_id", "");
         String name = sharedPreferences.getString("name", "");
         String phone = sharedPreferences.getString("phone", "");
         String date = sharedPreferences.getString("date", "");
@@ -87,6 +97,25 @@ public class Profile_Fragment extends Fragment {
                 binding.layoutMail.setEnabled(false);
                 binding.layoutAddress.setEnabled(false);
                 binding.layoutImage.setVisibility(View.GONE);
+                VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Request.Method.PUT, Config.IP + "customer/updateCustomer/" + id, response -> {
+                    Toast.makeText(requireActivity(), "onSuccess!", Toast.LENGTH_SHORT).show();
+                }, error -> {
+                    Toast.makeText(requireActivity(), "onFailure: " + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
+                }) {
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("name", Objects.requireNonNull(binding.edtName.getText()).toString());
+                        params.put("phone", Objects.requireNonNull(binding.edtPhone.getText()).toString());
+                        params.put("sex", binding.edtGender.getText().toString());
+                        params.put("date", Objects.requireNonNull(binding.edtDate.getText()).toString());
+                        params.put("email", Objects.requireNonNull(binding.edtMail.getText()).toString());
+                        params.put("address", Objects.requireNonNull(binding.edtAddress.getText()).toString());
+                        params.put("image", Objects.requireNonNull(binding.edtImage.getText()).toString());
+                        return params;
+                    }
+                });
             }
         });
     }
