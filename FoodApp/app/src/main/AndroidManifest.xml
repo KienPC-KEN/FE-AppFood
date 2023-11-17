@@ -18,19 +18,23 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".Login.LoginActivity_Staff"
-            android:exported="false" />
+            android:name=".MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Login.ForgotPasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Search_Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".Login.LoginActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Customer_Activity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"/>
         <activity
@@ -38,7 +42,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".Login.LoginActivity"
+            android:name=".Login.LoginActivity_Staff"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>

@@ -6,16 +6,12 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Model.Category;
-import com.example.foodapp.Model.Product;
-import com.example.foodapp.Util.CategoryCallBack;
 import com.example.foodapp.databinding.ItemCategoryBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdapter.Holder> {
 
@@ -57,13 +53,6 @@ public class Menu_CategoryAdapter extends RecyclerView.Adapter<Menu_CategoryAdap
     @Override
     public int getItemCount() {
         return list != null ? list.size() : 0;
-    }
-
-    public void setData(List<Category> newList) {
-        final DiffUtil.DiffResult result = DiffUtil.calculateDiff(new CategoryCallBack(this.list, newList));
-        this.list.clear();
-        this.list.addAll(newList);
-        result.dispatchUpdatesTo(this);
     }
 
     public static class Holder extends RecyclerView.ViewHolder {
