@@ -11,7 +11,7 @@ public class Staff {
     private String id;
     @SerializedName("idUser")
     @Expose
-    private String idUser;
+    private User user;
     @SerializedName("role")
     @Expose
     private String role;
@@ -27,12 +27,12 @@ public class Staff {
         this.id = id;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getRole() {
