@@ -12,16 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.example.foodapp.Login.LoginActivity;
+import com.example.foodapp.Model.Staff;
 import com.example.foodapp.R;
 import com.example.foodapp.config.Config;
+import com.example.foodapp.config.VolleySingleton;
+import com.google.gson.Gson;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -45,16 +50,10 @@ public class More_Fragment extends Fragment {
         tvPhone = view.findViewById(R.id.txt_sdt_more);
         imgAvatar = view.findViewById(R.id.avt_more);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE);
-        String name = sharedPreferences.getString("name", "");
-        String phone = sharedPreferences.getString("phone", "");
-        String image = sharedPreferences.getString("image", "");
-        String email = sharedPreferences.getString("email", "");
+        String id = sharedPreferences.getString("_id", "");
 
-        tvName.setText(name);
-        tvEmail.setText(email);
-        tvPhone.setText(phone);
+        getDataUserStaff(id);
 
-        Glide.with(getActivity()).load(image).into(imgAvatar);
         txtProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,5 +90,19 @@ public class More_Fragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void getDataUserStaff(String id) {
+        VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Config.IP + "customer/getCustomerById/" + id, response -> {
+            Staff staff = new Gson().fromJson(response, Staff.class);
+
+            tvName.setText(staff.getUser().getName());
+            tvEmail.setText(staff.getUser().getEmail());
+            tvPhone.setText(staff.getUser().getPhone());
+
+            Glide.with(requireActivity()).load(staff.getUser().getImage()).into(imgAvatar);
+        }, error -> {
+            Toast.makeText(requireActivity(), "onFailure: " + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
+        }));
     }
 }
