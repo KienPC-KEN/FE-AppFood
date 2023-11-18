@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,6 +52,7 @@ public class CartFragment extends Fragment implements OnTotalPriceUpdateListener
     private CartAdapter cartAdapter;
     private ArrayList<Map<String, String>> cartData = new ArrayList<>();
     Button btnAddDetail;
+    ImageView btnBack;
     String customerId;
     TextView tvDiscountDetail, tvTotalDetail;
 
@@ -61,8 +64,15 @@ public class CartFragment extends Fragment implements OnTotalPriceUpdateListener
             bottomNavigationView.setVisibility(View.INVISIBLE);
         }
 
+        BuyingFood_Fragment buyingFoodFragment = (BuyingFood_Fragment) getActivity().getSupportFragmentManager().findFragmentByTag("BuyingFoodFragmentTag");
+        if (buyingFoodFragment != null) {
+            buyingFoodFragment.orderSuccessful = false;
+        }
+
+
         recyclerView = view.findViewById(R.id.recyclerViewCart);
         btnAddDetail = view.findViewById(R.id.addOrderDetail);
+        btnBack = view.findViewById(R.id.btnBackCart);
         tvDiscountDetail=view.findViewById(R.id.DiscountAllOrder);
         tvTotalDetail = view.findViewById(R.id.TotalAllOrder);
         cartAdapter = new CartAdapter(cartData, getContext());
@@ -90,6 +100,23 @@ public class CartFragment extends Fragment implements OnTotalPriceUpdateListener
 
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+
+                fragmentManager.popBackStack();
+
+
+                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+                if (bottomNavigationView != null) {
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
         cartAdapter.notifyDataSetChanged();
 
@@ -281,9 +308,13 @@ public class CartFragment extends Fragment implements OnTotalPriceUpdateListener
     @Override
     public void onDestroyView() {
 
-        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
-        if (bottomNavigationView != null) {
-            bottomNavigationView.setVisibility(View.VISIBLE);
+//        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+//        if (bottomNavigationView != null) {
+//            bottomNavigationView.setVisibility(View.VISIBLE);
+//        }
+        BuyingFood_Fragment buyingFoodFragment = (BuyingFood_Fragment) getActivity().getSupportFragmentManager().findFragmentByTag("BuyingFoodFragmentTag");
+        if (buyingFoodFragment != null) {
+            buyingFoodFragment.orderSuccessful = false;
         }
         cartAdapter.setOnTotalPriceUpdateListener(null);
         super.onDestroyView();

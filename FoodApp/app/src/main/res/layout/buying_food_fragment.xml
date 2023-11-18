@@ -8,23 +8,34 @@
     android:id="@+id/fragment_container"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/food"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        app:layout_constraintHeight_percent=".30"
-        android:scaleType="centerCrop"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/imgProduct"
+        android:layout_height="200dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/food"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintHeight_percent=".30"
+            android:scaleType="centerCrop"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/imgProduct"
 
 
-        />
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/btnBackBuying"
+            android:src="@drawable/back"/>
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
