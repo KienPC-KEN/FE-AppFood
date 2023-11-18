@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.foodapp.Adapter_Customer.ViewPagerMenuAdapter;
@@ -19,6 +23,7 @@ public class Menu_Fragment extends Fragment {
    private TabLayout tabLayout;
    private ViewPager2 viewPager2;
    ViewPagerMenuAdapter adapter;
+   private ImageView imgCart;
 
 
     @Override
@@ -32,6 +37,8 @@ public class Menu_Fragment extends Fragment {
 
         viewPager2 = view.findViewById(R.id.paperMenu);
         tabLayout = view.findViewById(R.id.tabMenu);
+
+        imgCart = view.findViewById(R.id.img_cart);
 
         adapter = new ViewPagerMenuAdapter(requireActivity());
         viewPager2.setAdapter(adapter);
@@ -49,6 +56,19 @@ public class Menu_Fragment extends Fragment {
             }
         }).attach();
 
+        imgCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                transaction.replace(R.id.frameLayout, new CartFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
         return view;
     }
 }

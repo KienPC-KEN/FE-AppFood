@@ -10,14 +10,13 @@
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="300dp">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:src="@drawable/food"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            app:layout_constraintHeight_percent=".30"
             android:scaleType="centerCrop"
             app:layout_constraintVertical_bias="0"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,12 +24,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/imgProduct"
-
-
             />
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:id="@+id/btnBackBuying"
             android:src="@drawable/back"/>
@@ -62,15 +60,6 @@
                 android:textSize="30dp"
                 android:gravity="top"
                 android:textColor="@color/black"
-                />
-            <ImageView
-                android:id="@+id/heart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/heart"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="bottom"
-
                 />
 
         </LinearLayout>
@@ -162,10 +151,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:textSize="20dp"
+            android:textColor="@color/white"
             android:layout_gravity="center"
             android:backgroundTint="@color/FE5E00"
             android:drawableRight="@drawable/cart"
-            android:text="Add to cart"/>
+            android:text="Add to cart"
+            style="@style/Widget.Material3.Button.ElevatedButton"/>
 
 
     </LinearLayout>

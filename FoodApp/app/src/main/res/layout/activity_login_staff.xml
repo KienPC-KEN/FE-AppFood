@@ -85,6 +85,8 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/edittext_sgup"
                 android:hint="Your password"
+                android:inputType="textPassword"
+                android:maxLines="1"
                 android:padding="10dp" />
 
             <LinearLayout
