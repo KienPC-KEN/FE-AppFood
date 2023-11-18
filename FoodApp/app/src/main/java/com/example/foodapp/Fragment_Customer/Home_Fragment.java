@@ -21,6 +21,7 @@ import com.example.foodapp.R;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentHomeCustomerBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -94,6 +95,10 @@ public class Home_Fragment extends Fragment {
 
             }
         });
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView != null) {
+            bottomNavigationView.setVisibility(View.VISIBLE);
+        }
 
 
     }
