@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +56,8 @@ public class CartFragment extends Fragment implements OnTotalPriceUpdateListener
     ImageView btnBack;
     String customerId;
     TextView tvDiscountDetail, tvTotalDetail;
-
+    CheckBox checkboxAllItem;
+    boolean isSelectAllChecked = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
@@ -68,13 +70,19 @@ public class CartFragment extends Fragment implements OnTotalPriceUpdateListener
         if (buyingFoodFragment != null) {
             buyingFoodFragment.orderSuccessful = false;
         }
-
+        checkboxAllItem = view.findViewById(R.id.checkboxAllItem);
 
         recyclerView = view.findViewById(R.id.recyclerViewCart);
         btnAddDetail = view.findViewById(R.id.addOrderDetail);
         btnBack = view.findViewById(R.id.btnBackCart);
         tvDiscountDetail=view.findViewById(R.id.DiscountAllOrder);
         tvTotalDetail = view.findViewById(R.id.TotalAllOrder);
+
+        checkboxAllItem.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            isSelectAllChecked = isChecked;
+            updateAllCheckBoxes(isChecked);
+            cartAdapter.updateTotalPrice();
+        });
         cartAdapter = new CartAdapter(cartData, getContext());
 
         cartAdapter.setOnTotalPriceUpdateListener((OnTotalPriceUpdateListener) this);
@@ -100,6 +108,7 @@ public class CartFragment extends Fragment implements OnTotalPriceUpdateListener
 
             }
         });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +130,12 @@ public class CartFragment extends Fragment implements OnTotalPriceUpdateListener
         cartAdapter.notifyDataSetChanged();
 
         return view;
+    }
+    private void updateAllCheckBoxes(boolean isChecked) {
+        for (Map<String, String> orderItem : cartData) {
+            orderItem.put("isChecked", String.valueOf(isChecked));
+        }
+        cartAdapter.notifyDataSetChanged();
     }
 
     private void updateRecyclerView(String idCustomer) {
@@ -208,19 +223,21 @@ public class CartFragment extends Fragment implements OnTotalPriceUpdateListener
     public void onTotalPriceUpdated(int totalPrice,int totalDiscount) {
         tvTotalDetail.setText(totalPrice+" VND");
         tvDiscountDetail.setText(totalDiscount+ "VND");
-
+        checkboxAllItem.setChecked(isSelectAllChecked);
     }
 
     public void updateCartData(ArrayList<Map<String, String>> newCartData) {
         if (cartData != null) {
             cartData.clear();
             cartData.addAll(newCartData);
+            updateAllCheckBoxes(isSelectAllChecked);
             cartAdapter.notifyDataSetChanged();
         } else {
             cartData = new ArrayList<>(newCartData);
             cartAdapter.notifyDataSetChanged();
         }
     }
+
 
     private void getOrderItemsByIdCustomer(String idCustomer) {
         RequestQueue queue = Volley.newRequestQueue(getContext());

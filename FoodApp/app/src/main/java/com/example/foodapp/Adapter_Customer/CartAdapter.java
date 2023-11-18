@@ -38,6 +38,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private ArrayList<String> selectedOrderItemIds;
     private int selectedItemsTotalPrice = 0;
 
+
     private int selectedItemsTotalDiscount = 0;
 
     private OnTotalPriceUpdateListener listener;
