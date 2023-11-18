@@ -150,30 +150,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutMail"
-                style="?attr/textInputOutlinedStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:enabled="false"
-                android:hint="Mail"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                app:startIconDrawable="@drawable/baseline_mail_24"
-                app:startIconTint="@color/FE5E00">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtMail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:padding="16dp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutAddress"
                 style="?attr/textInputOutlinedStyle"
                 android:layout_width="match_parent"

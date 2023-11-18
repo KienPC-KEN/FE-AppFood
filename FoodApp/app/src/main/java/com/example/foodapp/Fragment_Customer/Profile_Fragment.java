@@ -22,10 +22,12 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.example.foodapp.Fagment_Staff.MoreFragment_Staff;
+import com.example.foodapp.Model.Staff;
 import com.example.foodapp.R;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentProfileBinding;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -38,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Profile_Fragment extends Fragment {
     public FragmentProfileBinding binding;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(getLayoutInflater(), container, false);
@@ -54,29 +56,25 @@ public class Profile_Fragment extends Fragment {
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("_id", "");
-        String name = sharedPreferences.getString("name", "");
-        String phone = sharedPreferences.getString("phone", "");
-        String date = sharedPreferences.getString("date", "");
-        String gender = sharedPreferences.getString("sex", "");
-        String email = sharedPreferences.getString("email", "");
-        String address = sharedPreferences.getString("address", "");
-        String image = sharedPreferences.getString("image", "");
 
-        getDataUserStaff(name, phone, date, gender, email, address, image);
+        getDataUserStaff(id);
 
         editChange(id);
     }
 
-    private void getDataUserStaff(String name, String phone, String date, String gender, String email, String address, String image) {
-        binding.edtName.setText(name);
-        binding.edtPhone.setText(phone);
-        binding.edtDate.setText(date);
-        binding.edtGender.setText(gender);
-        binding.edtMail.setText(email);
-        binding.edtAddress.setText(address);
-        binding.edtImage.setText(image);
-
-        Glide.with(requireActivity()).load(image).centerCrop().into(binding.imgAvt);
+    private void getDataUserStaff(String id) {
+        VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Config.IP + "customer/getCustomerById/" + id, response -> {
+            Staff staff = new Gson().fromJson(response, Staff.class);
+            binding.edtName.setText(staff.getUser().getName());
+            binding.edtPhone.setText(staff.getUser().getPhone());
+            binding.edtDate.setText(staff.getUser().getDate());
+            binding.edtGender.setText(staff.getUser().getSex());
+            binding.edtAddress.setText(staff.getUser().getAddress());
+            binding.edtImage.setText(staff.getUser().getImage());
+            Glide.with(requireActivity()).load(staff.getUser().getImage()).centerCrop().into(binding.imgAvt);
+        }, error -> {
+            Toast.makeText(requireActivity(), "onFailure: " + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
+        }));
     }
 
     public void editChange(String id) {
@@ -86,7 +84,6 @@ public class Profile_Fragment extends Fragment {
                 binding.layoutPhone.setEnabled(true);
                 binding.layoutDate.setEnabled(true);
                 binding.layoutGender.setEnabled(true);
-                binding.layoutMail.setEnabled(true);
                 binding.layoutAddress.setEnabled(true);
                 binding.layoutImage.setVisibility(View.VISIBLE);
             } else {
@@ -94,7 +91,6 @@ public class Profile_Fragment extends Fragment {
                 binding.layoutPhone.setEnabled(false);
                 binding.layoutDate.setEnabled(false);
                 binding.layoutGender.setEnabled(false);
-                binding.layoutMail.setEnabled(false);
                 binding.layoutAddress.setEnabled(false);
                 binding.layoutImage.setVisibility(View.GONE);
                 VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Request.Method.PUT, Config.IP + "customer/updateCustomer/" + id, response -> {
@@ -110,7 +106,6 @@ public class Profile_Fragment extends Fragment {
                         params.put("phone", Objects.requireNonNull(binding.edtPhone.getText()).toString());
                         params.put("sex", binding.edtGender.getText().toString());
                         params.put("date", Objects.requireNonNull(binding.edtDate.getText()).toString());
-                        params.put("email", Objects.requireNonNull(binding.edtMail.getText()).toString());
                         params.put("address", Objects.requireNonNull(binding.edtAddress.getText()).toString());
                         params.put("image", Objects.requireNonNull(binding.edtImage.getText()).toString());
                         return params;
