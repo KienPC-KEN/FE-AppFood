@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +37,9 @@ import java.util.Map;
 public class BuyingFood_Fragment extends Fragment {
     private TextView tvQuantity;
     Button btnIncre, btnDecre;
+    boolean orderSuccessful = false;
+    ImageView btnBackBuying;
+
     private int quantity = 1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +76,7 @@ public class BuyingFood_Fragment extends Fragment {
             Button btnOrder = view.findViewById(R.id.addOrder);
             tvQuantity = view.findViewById(R.id.tvQuantity);
             btnIncre = view.findViewById(R.id.btnIncrease);
+            btnBackBuying = view.findViewById(R.id.btnBackBuying);
             btnDecre = view.findViewById(R.id.btnDecrease);
 
             tvProductName.setText(productName);
@@ -78,6 +84,21 @@ public class BuyingFood_Fragment extends Fragment {
             tvDes.setText(productDes);
             tvTotal.setText("Total: " + total+" ("+spannableString+"%)");
             Picasso.get().load(productImg).into(imgPro);
+            btnBackBuying.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+
+                    fragmentManager.popBackStack();
+
+
+                    BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+                    if (bottomNavigationView != null) {
+                        bottomNavigationView.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
             btnIncre.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -106,7 +127,20 @@ public class BuyingFood_Fragment extends Fragment {
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            orderSuccessful = true;
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
+
+                            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+
+                            transaction.replace(R.id.frameLayout, new CartFragment());
+
+
+                            transaction.addToBackStack(null);
+
+
+                            transaction.commit();
                         }
                     }, new Response.ErrorListener() {
                         @Override
@@ -157,15 +191,15 @@ public class BuyingFood_Fragment extends Fragment {
     private void updateQuantity() {
         tvQuantity.setText(String.valueOf(quantity));
     }
+
     @Override
     public void onDestroyView() {
-
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
-        if (bottomNavigationView != null) {
+        if (bottomNavigationView != null && !orderSuccessful) {
             bottomNavigationView.setVisibility(View.VISIBLE);
         }
-
         super.onDestroyView();
     }
+
 
 }
