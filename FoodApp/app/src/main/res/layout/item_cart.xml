@@ -121,7 +121,8 @@
                     android:layout_gravity="bottom"
                     android:paddingBottom="10dp"
 
-                    android:src="@drawable/edit" />
+                    android:src="@drawable/delete_24"
+                    android:tint="@color/black"/>
 
 
             </LinearLayout>
