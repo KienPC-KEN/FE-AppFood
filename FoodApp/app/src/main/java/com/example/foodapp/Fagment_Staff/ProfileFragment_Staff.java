@@ -18,10 +18,12 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
+import com.example.foodapp.Model.Staff;
 import com.example.foodapp.R;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentProfileStaffBinding;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,27 +47,24 @@ public class ProfileFragment_Staff extends Fragment {
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("_id", "");
-        String name = sharedPreferences.getString("name", "");
-        String phone = sharedPreferences.getString("phone", "");
-        String date = sharedPreferences.getString("date", "");
-        String gender = sharedPreferences.getString("sex", "");
-        String email = sharedPreferences.getString("email", "");
-        String address = sharedPreferences.getString("address", "");
-        String image = sharedPreferences.getString("image", "");
 
-        getDataUserStaff(name, phone, date, gender, email, address, image);
+        getDataUserStaff(id);
         editChange(id);
     }
 
-    private void getDataUserStaff(String name, String phone, String date, String gender, String email, String address, String image) {
-        binding.edtName.setText(name);
-        binding.edtPhone.setText(phone);
-        binding.edtDate.setText(date);
-        binding.edtGender.setText(gender);
-        binding.edtAddress.setText(address);
-        binding.edtImage.setText(image);
-
-        Glide.with(requireActivity()).load(image).centerCrop().into(binding.imgAvt);
+    private void getDataUserStaff(String id) {
+        VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Config.IP + "staff/getStaffById/" + id, response -> {
+            Staff staff = new Gson().fromJson(response, Staff.class);
+            binding.edtName.setText(staff.getUser().getName());
+            binding.edtPhone.setText(staff.getUser().getPhone());
+            binding.edtDate.setText(staff.getUser().getDate());
+            binding.edtGender.setText(staff.getUser().getSex());
+            binding.edtAddress.setText(staff.getUser().getAddress());
+            binding.edtImage.setText(staff.getUser().getImage());
+            Glide.with(requireActivity()).load(staff.getUser().getImage()).centerCrop().into(binding.imgAvt);
+        }, error -> {
+            Toast.makeText(requireActivity(), "onFailure: " + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
+        }));
     }
 
     public void editChange(String id) {

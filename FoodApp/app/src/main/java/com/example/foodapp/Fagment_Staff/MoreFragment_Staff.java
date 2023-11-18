@@ -1,7 +1,6 @@
 package com.example.foodapp.Fagment_Staff;
 
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,16 +10,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.example.foodapp.Login.LoginActivity;
 import com.example.foodapp.Login.LoginActivity_Staff;
+import com.example.foodapp.Model.Staff;
 import com.example.foodapp.R;
+import com.example.foodapp.config.Config;
+import com.example.foodapp.config.VolleySingleton;
+import com.google.gson.Gson;
 
 public class MoreFragment_Staff extends Fragment {
 
@@ -43,21 +48,9 @@ public class MoreFragment_Staff extends Fragment {
         txtPhone = view.findViewById(R.id.txtPhoneStaff);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE);
-        String name = sharedPreferences.getString("name", "");
-        String email = sharedPreferences.getString("email", "");
-        String phone = sharedPreferences.getString("phone", "");
-        String image = sharedPreferences.getString("image", "");
-        String role = sharedPreferences.getString("role", "");
+        String id = sharedPreferences.getString("_id", "");
 
-        if(role.equals("staff")) {
-            manager_acc.setVisibility(View.GONE);
-        }
-
-        txtName.setText(name);
-        txtEmail.setText(email);
-        txtPhone.setText(phone);
-
-        Glide.with(getActivity()).load(image).into(imgavt);
+        getDataUserStaff(id);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,5 +91,22 @@ public class MoreFragment_Staff extends Fragment {
             }
         });
         return view;
+    }
+
+    private void getDataUserStaff(String id) {
+        VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Config.IP + "staff/getStaffById/" + id, response -> {
+            Staff staff = new Gson().fromJson(response, Staff.class);
+            if (staff.getRole().equalsIgnoreCase("staff")) {
+                manager_acc.setVisibility(View.GONE);
+            }
+
+            txtName.setText(staff.getUser().getName());
+            txtEmail.setText(staff.getUser().getEmail());
+            txtPhone.setText(staff.getUser().getPhone());
+
+            Glide.with(requireActivity()).load(staff.getUser().getImage()).into(imgavt);
+        }, error -> {
+            Toast.makeText(requireActivity(), "onFailure: " + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
+        }));
     }
 }
