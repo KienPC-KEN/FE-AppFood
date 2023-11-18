@@ -1,5 +1,6 @@
 package com.example.foodapp.Fragment_Customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.foodapp.Adapter_Customer.HomeAdapter;
 import com.example.foodapp.Model.Product;
 import com.example.foodapp.R;
+import com.example.foodapp.Search_Activity;
 import com.example.foodapp.config.Config;
 import com.example.foodapp.config.VolleySingleton;
 import com.example.foodapp.databinding.FragmentHomeCustomerBinding;
@@ -58,6 +60,14 @@ public class Home_Fragment extends Fragment {
         list = new ArrayList<>();
         listFood = new ArrayList<>();
         listDrink = new ArrayList<>();
+
+        binding.searchFoods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Search_Activity.class);
+                startActivity(intent);
+            }
+        });
 
         JsonArrayRequest getProduct = new JsonArrayRequest(Request.Method.GET, Config.IP + "product", null,
                 response -> {

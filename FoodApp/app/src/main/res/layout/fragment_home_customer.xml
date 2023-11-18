@@ -16,7 +16,7 @@
         android:padding="10dp">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/sv_foods"
+            android:id="@+id/search_foods"
             android:layout_width="235dp"
             android:layout_height="50dp"
             android:layout_marginLeft="15dp"
