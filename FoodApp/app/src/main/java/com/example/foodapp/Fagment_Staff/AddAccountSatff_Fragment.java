@@ -79,7 +79,8 @@ public class AddAccountSatff_Fragment extends Fragment {
             binding.edtDate.setText(staff.getUser().getDate());
             binding.tvPassword.setVisibility(View.GONE);
             binding.edtPassword.setVisibility(View.GONE);
-            binding.edtEmail.setText(staff.getUser().getEmail());
+            binding.tvEmail.setVisibility(View.GONE);
+            binding.edtEmail.setVisibility(View.GONE);
             binding.edtAddress.setText(staff.getUser().getAddress());
             binding.edtImage.setText(staff.getUser().getImage());
             if (staff.getUser().getSex().equalsIgnoreCase("Nam")) {

@@ -62,7 +62,6 @@ public class ProfileFragment_Staff extends Fragment {
         binding.edtPhone.setText(phone);
         binding.edtDate.setText(date);
         binding.edtGender.setText(gender);
-        binding.edtMail.setText(email);
         binding.edtAddress.setText(address);
         binding.edtImage.setText(image);
 
@@ -76,7 +75,6 @@ public class ProfileFragment_Staff extends Fragment {
                 binding.layoutPhone.setEnabled(true);
                 binding.layoutDate.setEnabled(true);
                 binding.layoutGender.setEnabled(true);
-                binding.layoutMail.setEnabled(true);
                 binding.layoutAddress.setEnabled(true);
                 binding.layoutImage.setVisibility(View.VISIBLE);
             } else {
@@ -84,7 +82,6 @@ public class ProfileFragment_Staff extends Fragment {
                 binding.layoutPhone.setEnabled(false);
                 binding.layoutDate.setEnabled(false);
                 binding.layoutGender.setEnabled(false);
-                binding.layoutMail.setEnabled(false);
                 binding.layoutAddress.setEnabled(false);
                 binding.layoutImage.setVisibility(View.GONE);
                 VolleySingleton.getInstance(requireActivity()).addToRequestQueue(new StringRequest(Request.Method.PUT, Config.IP + "staff/updateStaff/" + id, response -> {
@@ -100,7 +97,6 @@ public class ProfileFragment_Staff extends Fragment {
                         params.put("phone", Objects.requireNonNull(binding.edtPhone.getText()).toString());
                         params.put("sex", binding.edtGender.getText().toString());
                         params.put("date", Objects.requireNonNull(binding.edtDate.getText()).toString());
-                        params.put("email", Objects.requireNonNull(binding.edtMail.getText()).toString());
                         params.put("address", Objects.requireNonNull(binding.edtAddress.getText()).toString());
                         params.put("image", Objects.requireNonNull(binding.edtImage.getText()).toString());
                         return params;
